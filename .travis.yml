@@ -11,13 +11,13 @@ python:
   - 3.5
 matrix:
   exclude:
-    - python=3.5
-      env=DJANGO_VERSION=1.4.22
-    - python=3.5
-      env=DJANGO_VERSION=1.5.12
+    - python: 3.5
+      env: DJANGO_VERSION=1.4.22
+    - python: 3.5
+      env: DJANGO_VERSION=1.5.12
 install:
   - pip install -q Django==$DJANGO_VERSION
-  - pip install coveralls
+  - pip install coveralls mock
 script:
   - coverage run -m unittest discover -s tests -p *_test.py
 after_success:
