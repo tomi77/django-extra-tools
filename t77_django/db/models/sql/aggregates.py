@@ -1,4 +1,9 @@
-from django.db.models.aggregates import Aggregate
+"""
+Classes to represent the default SQL aggregate functions
+"""
+from django.db.models.sql.aggregates import Aggregate
+
+__all__ = ['First', 'Last', 'Median', 'StringAgg']
 
 
 class First(Aggregate):

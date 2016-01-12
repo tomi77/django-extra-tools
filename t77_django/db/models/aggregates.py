@@ -1,6 +1,11 @@
+"""
+Classes to represent the definitions of aggregate functions.
+"""
 from django.db.models import Aggregate as BaseAggregate
 
 from .sql import aggregates as base_aggregates_module
+
+__all__ = ['First', 'Last', 'Median', 'StringAgg']
 
 
 class Aggregate(BaseAggregate):
