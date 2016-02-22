@@ -2,11 +2,11 @@ from setuptools import setup
 
 
 setup(
-    name="t77-django",
+    name="django_extras",
     version='0.1',
     author="Tomasz Jakub Rup",
     author_email="tomasz.rup@gmail.com",
-    url='https://github.com/tomi77/python-t77-django',
+    url='https://github.com/tomi77/django_extras',
     description='A set of functions related with Django',
     long_description=open("README.md").read(),
     classifiers=[
@@ -28,5 +28,5 @@ setup(
     ],
     license='MIT',
     install_requires=['Django >= 1.4.3'],
-    packages=['t77_django']
+    packages=['django_extras']
 )
