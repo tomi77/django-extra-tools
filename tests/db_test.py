@@ -4,7 +4,7 @@ try:
 except ImportError:
     import mock
 
-from t77_django.db import pg_version
+from django_extras.db import pg_version
 
 
 def mock_get_connection(version):
