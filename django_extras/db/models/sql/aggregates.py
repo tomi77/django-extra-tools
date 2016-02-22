@@ -3,23 +3,23 @@ Classes to represent the default SQL aggregate functions
 """
 from django.db.models.sql.aggregates import Aggregate
 
-__all__ = ['First', 'Last', 'Median', 'StringAgg']
+
+class AggregateWithOrderBy(Aggregate):
+    sql_template = '%(function)s(%(field)s%(order_by)s)'
+
+    def __init__(self, col, order_by=None, **extra):
+        order_by_str = order_by and ' ORDER BY %s' % order_by or ''
+
+        super(AggregateWithOrderBy, self).__init__(col, order_by=order_by_str,
+                                                   **extra)
 
 
-class First(Aggregate):
+class First(AggregateWithOrderBy):
     sql_function = 'first'
-    sql_template = '%(function)s(%(field)s%(order_by)s)'
-
-    def __init__(self, col, order_by=None, **extra):
-        super(First, self).__init__(col, order_by=order_by and ' ORDER BY %s' % order_by or '', **extra)
 
 
-class Last(Aggregate):
+class Last(AggregateWithOrderBy):
     sql_function = 'last'
-    sql_template = '%(function)s(%(field)s%(order_by)s)'
-
-    def __init__(self, col, order_by=None, **extra):
-        super(Last, self).__init__(col, order_by=order_by and ' ORDER BY %s' % order_by or '', **extra)
 
 
 class Median(Aggregate):
@@ -32,4 +32,5 @@ class StringAgg(Aggregate):
     sql_template = "%(function)s(%(field)s, '%(delimiter)s')"
 
     def __init__(self, col, delimiter=',', **extra):
-        super(StringAgg, self).__init__(col, delimiter="'%s'" % delimiter, **extra)
+        super(StringAgg, self).__init__(col, delimiter="'%s'" % delimiter,
+                                        **extra)
