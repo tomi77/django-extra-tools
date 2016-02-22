@@ -1,7 +1,7 @@
 # .coveragerc to control coverage.py
 [run]
 branch = True
-source = t77_django
+source = django_extras
 
 [report]
 # Regexes for lines to exclude from consideration
