@@ -1,16 +1,18 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+
+from django_extras import __version__, __author__, __email__, __license__
 
 
 setup(
     name="django_extras",
-    version='0.1',
-    author="Tomasz Jakub Rup",
-    author_email="tomasz.rup@gmail.com",
+    version=__version__,
+    author=__author__,
+    author_email=__email__,
     url='https://github.com/tomi77/django_extras',
     description='A set of functions related with Django',
-    long_description=open("README.md").read(),
+    long_description=open("README.rst").read(),
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
@@ -26,7 +28,10 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
     ],
-    license='MIT',
+    license=__license__,
     install_requires=['Django >= 1.4.3'],
-    packages=['django_extras']
+    packages=find_packages(exclude=['tests']),
+    package_data={
+        'django_extras': ['sql/*.sql'],
+    }
 )
