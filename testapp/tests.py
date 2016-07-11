@@ -1,10 +1,11 @@
-import unittest
+from django.test import TestCase
+
+from django_extras.db import pg_version
+
 try:
     from unittest import mock
 except ImportError:
-    import mock
-
-from django_extras.db import pg_version
+    from mock import mock
 
 
 def mock_get_connection(version):
@@ -30,7 +31,7 @@ def mock_get_connection(version):
     return get_connection
 
 
-class PgVersionTestCase(unittest.TestCase):
+class PgVersionTestCase(TestCase):
     @mock.patch('django_extras.db.get_connection', mock_get_connection('9.4.1'))
     def test_9_4_1(self):
         """Version 9.4.1"""
