@@ -35,7 +35,7 @@ before_script:
   - psql -f django_extras/sql/median.sql -U postgres
 
 script:
-  - coverage run manage.py testapp
+  - coverage run manage.py test testapp
 
 after_success:
   - coveralls
