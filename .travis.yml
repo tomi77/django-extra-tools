@@ -1,26 +1,25 @@
 language: python
 
 env:
-  - DATABASE_NAME=travis
-  - DATABASE_USER=travis
-  - DATABASE_PASSWORD=""
-  - DATABASE_HOST=127.0.0.1
-  - DATABASE_PORT=5432
+  global:
+    - DATABASE_NAME=travis
+    - DATABASE_USER=travis
+    - DATABASE_PASSWORD=""
+    - DATABASE_HOST=127.0.0.1
+    - DATABASE_PORT=5432
+  matrix:
+    - DJANGO_VERSION=1.4.22
+    - DJANGO_VERSION=1.5.12
+    - DJANGO_VERSION=1.6.11
+    - DJANGO_VERSION=1.7.11
+    - DJANGO_VERSION=1.8.13
+    - DJANGO_VERSION=1.9.7
+
+python:
+  - 2.7
 
 matrix:
   include:
-    - python: 2.7
-      env: DJANGO_VERSION=1.4.22
-    - python: 2.7
-      env: DJANGO_VERSION=1.5.12
-    - python: 2.7
-      env: DJANGO_VERSION=1.6.11
-    - python: 2.7
-      env: DJANGO_VERSION=1.7.11
-    - python: 2.7
-      env: DJANGO_VERSION=1.8.13
-    - python: 2.7
-      env: DJANGO_VERSION=1.9.7
     - python: 3.5
       env: DJANGO_VERSION=1.9.7
 
