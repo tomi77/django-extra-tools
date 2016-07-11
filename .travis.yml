@@ -11,11 +11,11 @@ matrix:
     - python: 2.7
       env: DJANGO_VERSION=1.7.11
     - python: 2.7
-      env: DJANGO_VERSION=1.8.8
+      env: DJANGO_VERSION=1.8.13
     - python: 2.7
-      env: DJANGO_VERSION=1.9.1
+      env: DJANGO_VERSION=1.9.7
     - python: 3.5
-      env: DJANGO_VERSION=1.9.1
+      env: DJANGO_VERSION=1.9.7
 
 addons:
   postgresql: 9.4
