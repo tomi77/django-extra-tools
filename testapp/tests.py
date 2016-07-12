@@ -64,16 +64,20 @@ class LastTestCase(TestCase):
 class MedianTestCase(TestCase):
     fixtures = ['median.yaml']
 
-    def test_odd_number_of_values(self):
-        qs = MedianTest.objects.all().aggregate(Median('val_int'),
-                                                Median('val_float'))
+    def test_odd_number_of_integers(self):
+        qs = MedianTest.objects.all().aggregate(Median('val_int'))
         self.assertEqual(qs['val_int__median'], 15)
+
+    def test_even_number_of_integers(self):
+        qs = MedianTest.objects.filter(pk__lt=5).aggregate(Median('val_int'))
+        self.assertEqual(qs['val_int__median'], 17.5)
+
+    def test_odd_number_of_floats(self):
+        qs = MedianTest.objects.all().aggregate(Median('val_float'))
         self.assertEqual(qs['val_float__median'], 15.0)
 
-    def test_even_number_of_values(self):
-        qs = MedianTest.objects.filter(pk__lt=5).aggregate(Median('val_int'),
-                                                           Median('val_float'))
-        self.assertEqual(qs['val_int__median'], 17.5)
+    def test_even_number_of_floats(self):
+        qs = MedianTest.objects.filter(pk__lt=5).aggregate(Median('val_float'))
         self.assertEqual(qs['val_float__median'], 17.5)
 
 
