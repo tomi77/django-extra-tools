@@ -1,0 +1,18 @@
+-
+  model: 'testapp.StringAggTest'
+  pk: 1
+  fields:
+    val_str: '1'
+    val_int: 1
+-
+  model: 'testapp.StringAggTest'
+  pk: 2
+  fields:
+    val_str: '2'
+    val_int: 2
+-
+  model: 'testapp.StringAggTest'
+  pk: 3
+  fields:
+    val_str: '3'
+    val_int: 3

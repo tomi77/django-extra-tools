@@ -1,8 +1,8 @@
 from django.test import TestCase
 
 from django_extras.db import pg_version
-from django_extras.db.models.aggregates import First, Last
-from testapp.models import FirstLastTest, MedianTest
+from django_extras.db.models.aggregates import First, Last, Median, StringAgg
+from testapp.models import FirstLastTest, MedianTest, StringAggTest
 
 try:
     from unittest import mock
@@ -59,3 +59,39 @@ class LastTestCase(TestCase):
     def test_last_with_order(self):
         qs = FirstLastTest.objects.all().aggregate(last=Last('val', order_by='ts'))
         self.assertEqual(qs['last'], 15)
+
+
+class MedianTestCase(TestCase):
+    fixtures = ['median.yaml']
+
+    def test_odd_number_of_values(self):
+        qs = MedianTest.objects.all().aggregate(Median('val_int'),
+                                                Median('val_float'))
+        self.assertEqual(qs['val_int__median'], 15)
+        self.assertEqual(qs['val_float__median'], 15.0)
+
+    def test_even_number_of_values(self):
+        qs = MedianTest.objects.filter(pk__lt=5).aggregate(Median('val_int'),
+                                                           Median('val_float'))
+        self.assertEqual(qs['val_int__median'], 17.5)
+        self.assertEqual(qs['val_float__median'], 17.5)
+
+
+class StringAggTestCase(TestCase):
+    fixtures = ['string_agg.yaml']
+
+    def test_default_delimiter(self):
+        qs = StringAggTest.objects.all().aggregate(StringAgg('val_str'))
+        self.assertEqual(qs['val_str__stringagg'], '1,2,3')
+
+    def test_own_delimiter(self):
+        qs = StringAggTest.objects.all().aggregate(StringAgg('val_str', delimiter='-'))
+        self.assertEqual(qs['val_str__stringagg'], '1-2-3')
+
+    def test_int_default_delimiter(self):
+        qs = StringAggTest.objects.all().aggregate(StringAgg('val_int'))
+        self.assertEqual(qs['val_int__stringagg'], '1,2,3')
+
+    def test_int_own_delimiter(self):
+        qs = StringAggTest.objects.all().aggregate(StringAgg('val_int', delimiter='-'))
+        self.assertEqual(qs['val_int__stringagg'], '1-2-3')

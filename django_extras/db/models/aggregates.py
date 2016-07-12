@@ -40,7 +40,18 @@ class Median(Aggregate):
     name = 'Median'
     function = 'MEDIAN'
 
+    def convert_value(self, value, expression, connection, context):
+        return value
+
 
 class StringAgg(Aggregate):
     name = 'StringAgg'
-    function = 'STRINGAGG'
+    function = 'STRING_AGG'
+    template = "%(function)s(%(expressions)s::TEXT, '%(delimiter)s')"
+
+    def __init__(self, expression, delimiter=',', **extra):
+        super(StringAgg, self).__init__(expression, delimiter=delimiter,
+                                        **extra)
+
+    def convert_value(self, value, expression, connection, context):
+        return value
