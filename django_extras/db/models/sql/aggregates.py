@@ -18,7 +18,6 @@ class Last(AggregateWithOrderBy):
 
 class Median(Aggregate):
     sql_function = 'median'
-    is_ordinal = True
 
 
 class StringAgg(Aggregate):
