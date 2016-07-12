@@ -1,4 +1,4 @@
-from django.http.request import HttpRequest
+from django.http import HttpRequest
 from django.test import TestCase
 
 from django_extras.db import pg_version
