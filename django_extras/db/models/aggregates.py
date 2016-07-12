@@ -21,8 +21,9 @@ class AggregateWithOrderBy(Aggregate):
 
     def __init__(self, expression, order_by=None, **extra):
         order_by = order_by and ' ORDER BY %s' % order_by or ''
-        super(AggregateWithOrderBy, self).__init__(expression, order_by=order_by, **extra)
-
+        super(AggregateWithOrderBy, self).__init__(expression,
+                                                   order_by=order_by,
+                                                   **extra)
 
 
 class First(AggregateWithOrderBy):
