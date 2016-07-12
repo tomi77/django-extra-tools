@@ -32,7 +32,7 @@ setup(
     ],
     license=__license__,
     install_requires=['Django >= 1.4.3'],
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=['testapp']),
     package_data={
         'django_extras': ['sql/*.sql'],
     }
