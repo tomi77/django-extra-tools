@@ -1,4 +1,4 @@
--- Based on: https://wiki.postgresql.org/wiki/First/last_%28aggregate%29
+-- Based on: https://wiki.postgresql.org/wiki/First/last_(aggregate)
 
 -- Create a function that always returns the first non-NULL item
 CREATE OR REPLACE FUNCTION public.first_agg(ANYELEMENT, ANYELEMENT)
