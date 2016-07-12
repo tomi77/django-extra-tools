@@ -1,7 +1,9 @@
+from django.http.request import HttpRequest
 from django.test import TestCase
 
 from django_extras.db import pg_version
 from django_extras.db.models.aggregates import First, Last, Median, StringAgg
+from django_extras.wsgi_request import get_client_ip
 from testapp.models import FirstLastTest, MedianTest, StringAggTest
 
 try:
@@ -99,3 +101,25 @@ class StringAggTestCase(TestCase):
     def test_int_own_delimiter(self):
         qs = StringAggTest.objects.all().aggregate(StringAgg('val_int', delimiter='-'))
         self.assertEqual(qs['val_int__stringagg'], '1-2-3')
+
+
+class GetClientIpTestCase(TestCase):
+    def test_empty_all(self):
+        request = HttpRequest()
+        self.assertIsNone(get_client_ip(request))
+
+    def test_remote_addr(self):
+        request = HttpRequest()
+        request.META = {'REMOTE_ADDR': '10.10.0.1'}
+        self.assertEqual(get_client_ip(request), '10.10.0.1')
+
+    def test_x_forwarded_for(self):
+        request = HttpRequest()
+        request.META = {'HTTP_X_FORWARDED_FOR': '10.10.0.1'}
+        self.assertIsNone(get_client_ip(request))
+
+    def test_proxy(self):
+        request = HttpRequest()
+        request.META = {'REMOTE_ADDR': '192.168.0.1',
+                        'HTTP_X_FORWARDED_FOR': '192.168.0.1,123.234.123.234'}
+        self.assertEqual(get_client_ip(request), '123.234.123.234')
