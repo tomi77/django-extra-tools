@@ -32,7 +32,7 @@ Install SQL functions
 
    python manage.py migrate
 
-Median aggregate function on Django 1.4 needs monkey patch
+StringAgg aggregate function on Django 1.4 needs monkey patch
 ::
 
    from django_extras.monkey import patch_django
