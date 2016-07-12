@@ -35,6 +35,7 @@ install:
   - pip install --upgrade mock
 
 script:
+  - python manage.py syncdb
   - python manage.py migrate
   - coverage run manage.py test testapp
 
