@@ -9,3 +9,25 @@ django-extras
 .. image:: https://codeclimate.com/github/tomi77/django-extras/badges/gpa.svg
    :target: https://codeclimate.com/github/tomi77/django-extras
    :alt: Code Climate
+
+Installation
+============
+::
+
+   pip install django-extras
+
+Quick start
+===========
+
+Enable ``django-extras``
+::
+
+   INSTALLED_APPS = [
+       ...
+       'django_extras',
+   ]
+
+Install SQL functions
+::
+
+   python manage.py migrate

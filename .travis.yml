@@ -30,16 +30,12 @@ services:
   - postgresql
 
 install:
-  - pip install coveralls psycopg2
+  - pip install coveralls psycopg2 pyyaml south
   - pip install -q Django==$DJANGO_VERSION
   - pip install --upgrade mock
 
-before_script:
-  - psql -f django_extras/sql/first.sql -U travis
-  - psql -f django_extras/sql/last.sql -U travis
-  - psql -f django_extras/sql/median.sql -U travis
-
 script:
+  - python manage.py migrate
   - coverage run manage.py test testapp
 
 after_success:

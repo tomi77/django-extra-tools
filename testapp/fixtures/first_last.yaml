@@ -1,0 +1,24 @@
+-
+  model: 'testapp.FirstLast'
+  pk: 1
+  fields:
+    ts: '2016-01-03'
+    val: 25
+-
+  model: 'testapp.FirstLast'
+  pk: 2
+  fields:
+    ts: '2016-01-02'
+    val: 20
+-
+  model: 'testapp.FirstLast'
+  pk: 3
+  fields:
+    ts: '2016-01-04'
+    val: 15
+-
+  model: 'testapp.FirstLast'
+  pk: 4
+  fields:
+    ts: '2016-01-01'
+    val: 10

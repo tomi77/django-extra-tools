@@ -1,5 +1,7 @@
 import os
 
+import django
+
 
 SECRET_KEY = 'qaz123'
 
@@ -15,7 +17,8 @@ DATABASES = {
 }
 
 INSTALLED_APPS = [
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django_extras',
     'testapp',
 ]
+if django.VERSION[:2] <= (1, 6):
+    INSTALLED_APPS += ['south']
