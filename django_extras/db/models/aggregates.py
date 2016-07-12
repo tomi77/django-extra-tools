@@ -18,15 +18,29 @@ class Aggregate(BaseAggregate):
 
 class First(Aggregate):
     name = 'First'
+    function = 'FIRST'
+    template = '%(function)s(%(expressions)s%(order_by)s)'
+
+    def __init__(self, expression, order_by=None, **extra):
+        order_by = order_by and ' ORDER BY %s' % order_by or ''
+        super(First, self).__init__(expression, order_by=order_by, **extra)
 
 
 class Last(Aggregate):
     name = 'Last'
+    function = 'LAST'
+    template = '%(function)s(%(expressions)s%(order_by)s)'
+
+    def __init__(self, expression, order_by=None, **extra):
+        order_by = order_by and ' ORDER BY %s' % order_by or ''
+        super(Last, self).__init__(expression, order_by=order_by, **extra)
 
 
 class Median(Aggregate):
     name = 'Median'
+    function = 'MEDIAN'
 
 
 class StringAgg(Aggregate):
     name = 'StringAgg'
+    function = 'STRINGAGG'

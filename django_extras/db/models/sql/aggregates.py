@@ -7,12 +7,6 @@ from django.db.models.sql.aggregates import Aggregate
 class AggregateWithOrderBy(Aggregate):
     sql_template = '%(function)s(%(field)s%(order_by)s)'
 
-    def __init__(self, col, order_by=None, **extra):
-        order_by_str = order_by and ' ORDER BY %s' % order_by or ''
-
-        super(AggregateWithOrderBy, self).__init__(col, order_by=order_by_str,
-                                                   **extra)
-
 
 class First(AggregateWithOrderBy):
     sql_function = 'first'
