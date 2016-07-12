@@ -14,6 +14,3 @@ class Migration(SchemaMigration):
         db.execute(FIRST_SQL)
         db.execute(LAST_SQL)
         db.execute(MEDIAN_SQL)
-
-    def backwards(self, orm):
-        pass

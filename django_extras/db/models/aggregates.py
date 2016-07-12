@@ -16,24 +16,23 @@ class Aggregate(BaseAggregate):
         query.aggregates[alias] = aggregate
 
 
-class First(Aggregate):
+class AggregateWithOrderBy(Aggregate):
+    template = '%(function)s(%(expressions)s%(order_by)s)'
+
+    def __init__(self, expression, order_by=None, **extra):
+        order_by = order_by and ' ORDER BY %s' % order_by or ''
+        super(AggregateWithOrderBy, self).__init__(expression, order_by=order_by, **extra)
+
+
+
+class First(AggregateWithOrderBy):
     name = 'First'
     function = 'FIRST'
-    template = '%(function)s(%(expressions)s%(order_by)s)'
-
-    def __init__(self, expression, order_by=None, **extra):
-        order_by = order_by and ' ORDER BY %s' % order_by or ''
-        super(First, self).__init__(expression, order_by=order_by, **extra)
 
 
-class Last(Aggregate):
+class Last(AggregateWithOrderBy):
     name = 'Last'
     function = 'LAST'
-    template = '%(function)s(%(expressions)s%(order_by)s)'
-
-    def __init__(self, expression, order_by=None, **extra):
-        order_by = order_by and ' ORDER BY %s' % order_by or ''
-        super(Last, self).__init__(expression, order_by=order_by, **extra)
 
 
 class Median(Aggregate):
