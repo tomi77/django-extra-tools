@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from django_extras.db import pg_version
 from django_extras.db.models.aggregates import First, Last
-from testapp.models import FirstLast
+from testapp.models import FirstLastTest, MedianTest
 
 try:
     from unittest import mock
@@ -49,7 +49,7 @@ class FirstTestCase(TestCase):
     fixtures = ['first_last.yaml']
 
     def test_first_with_order(self):
-        qs = FirstLast.objects.all().aggregate(first=First('val', order_by='ts'))
+        qs = FirstLastTest.objects.all().aggregate(first=First('val', order_by='ts'))
         self.assertEqual(qs['first'], 10)
 
 
@@ -57,5 +57,5 @@ class LastTestCase(TestCase):
     fixtures = ['first_last.yaml']
 
     def test_last_with_order(self):
-        qs = FirstLast.objects.all().aggregate(last=Last('val', order_by='ts'))
+        qs = FirstLastTest.objects.all().aggregate(last=Last('val', order_by='ts'))
         self.assertEqual(qs['last'], 15)
