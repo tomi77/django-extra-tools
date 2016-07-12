@@ -15,8 +15,7 @@ env:
     - DJANGO_VERSION=1.8.13
     - DJANGO_VERSION=1.9.7
 
-python:
-  - 2.7
+python: 2.7
 
 matrix:
   include:
@@ -26,18 +25,17 @@ matrix:
 addons:
   postgresql: 9.4
 
-services:
-  - postgresql
+services: postgresql
 
 install:
   - pip install coveralls psycopg2 pyyaml south
   - pip install -q Django==$DJANGO_VERSION
   - pip install --upgrade mock
 
-script:
-  - python manage.py syncdb
+before_script:
+  - ./travis_syncdb.sh
   - python manage.py migrate
-  - coverage run manage.py test testapp
 
-after_success:
-  - coveralls
+script: coverage run manage.py test testapp
+
+after_success: coveralls
