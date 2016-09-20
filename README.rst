@@ -38,3 +38,26 @@ StringAgg aggregate function on Django 1.4 needs monkey patch
    from django_extras.monkey import patch_django
 
    patch_all()
+
+Template filters
+================
+
+`parse_datetime`
+----------------
+
+Parse datetime from string
+::
+
+   {% load parse_datetime %}
+
+   {{ string_datetime|parse_datetime|date:"Y-m-d H:i" }}
+
+`parse_date`
+------------
+
+Parse date from string
+::
+
+   {% load parse_date %}
+
+   {{ string_date|parse_date|date:"Y-m-d" }}
