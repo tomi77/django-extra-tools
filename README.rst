@@ -12,7 +12,8 @@ django-extras
 
 Installation
 ============
-::
+
+.. sourcecode:: sh
 
    pip install django-extras
 
@@ -29,7 +30,8 @@ Enable ``django-extras``
    ]
 
 Install SQL functions
-::
+
+.. sourcecode:: sh
 
    python manage.py migrate
 
@@ -48,7 +50,8 @@ parse_datetime
 --------------
 
 Parse datetime from string.
-::
+
+.. sourcecode:: htmldjango
 
    {% load parse %}
 
@@ -58,7 +61,8 @@ parse_date
 ----------
 
 Parse date from string.
-::
+
+.. sourcecode:: htmldjango
 
    {% load parse %}
 
@@ -68,7 +72,8 @@ parse_time
 ----------
 
 Parse time from string.
-::
+
+.. sourcecode:: htmldjango
 
    {% load parse %}
 
@@ -78,7 +83,8 @@ parse_duration
 --------------
 
 Parse duration (timedelta) from string.
-::
+
+.. sourcecode:: htmldjango
 
    {% load parse %}
 
