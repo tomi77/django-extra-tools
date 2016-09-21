@@ -42,22 +42,42 @@ StringAgg aggregate function on Django 1.4 needs monkey patch
 Template filters
 ================
 
-`parse_datetime`
-----------------
+parse_datetime
+--------------
 
 Parse datetime from string
 ::
 
-   {% load parse_datetime %}
+   {% load parse %}
 
    {{ string_datetime|parse_datetime|date:"Y-m-d H:i" }}
 
-`parse_date`
-------------
+parse_date
+----------
 
 Parse date from string
 ::
 
-   {% load parse_date %}
+   {% load parse %}
 
    {{ string_date|parse_date|date:"Y-m-d" }}
+
+parse_time
+----------
+
+Parse time from string
+::
+
+   {% load parse %}
+
+   {{ string_time|parse_time|date:"H:i" }}
+
+parse_duration
+--------------
+
+Parse duration (timedelta) from string
+::
+
+   {% load parse %}
+
+   {{ string_duration|parse_duration }}
