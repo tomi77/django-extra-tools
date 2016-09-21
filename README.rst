@@ -162,3 +162,52 @@ Return tuple with PostgreSQL version of a specific connection.
    from django_extras.db.models import pg_version
 
    version = pg_version()
+
+HTTP Response
+=============
+
+HttpResponseGetFile
+-------------------
+
+An HTTP response class with the "download file" headers.
+
+.. sourcecode:: python
+
+   from django_extras.http import HttpResponseGetFile
+
+   return HttpResponseGetFile(filename='file.txt', content=b'file content', content_type='file/text')
+
+WSGI Request
+============
+
+get_client_ip
+-------------
+
+Get the client IP from the request.
+
+.. sourcecode:: python
+
+   from django_extras.wsgi_request import get_client_ip
+
+   ip = get_client_ip(request)
+
+Management
+==========
+
+OneInstanceCommand
+------------------
+
+A management command which will be run only one instance of command with
+name ``name``. No other command with name ``name`` can not be run in the
+same time.
+
+.. sourcecode:: python
+
+   from django_extras.management import OneInstanceCommand
+
+   class MyCommand(OneInstanceCommand):
+       name = 'mycommand'
+
+       def handle_instance(self, *args, **kwargs):
+           # some operations
+
