@@ -45,7 +45,7 @@ Template filters
 parse_datetime
 --------------
 
-Parse datetime from string
+Parse datetime from string.
 ::
 
    {% load parse %}
@@ -55,7 +55,7 @@ Parse datetime from string
 parse_date
 ----------
 
-Parse date from string
+Parse date from string.
 ::
 
    {% load parse %}
@@ -65,7 +65,7 @@ Parse date from string
 parse_time
 ----------
 
-Parse time from string
+Parse time from string.
 ::
 
    {% load parse %}
@@ -75,9 +75,76 @@ Parse time from string
 parse_duration
 --------------
 
-Parse duration (timedelta) from string
+Parse duration (timedelta) from string.
 ::
 
    {% load parse %}
 
    {{ string_duration|parse_duration }}
+
+Aggregation
+===========
+
+First
+-----
+
+Returns the first non-NULL item.
+::
+
+   from django_extras.db.models.aggregates import First
+
+   Table.objects.aggregate(First('col1', order_by='col2'))
+
+Last
+----
+
+Returns the last non-NULL item.
+::
+
+   from django_extras.db.models.aggregates import Last
+
+   Table.objects.aggregate(Last('col1', order_by='col2'))
+
+Median
+------
+
+Returns median value.
+::
+
+   from django_extras.db.models.aggregates import Median
+
+   Table.objects.aggregate(Median('col1'))
+
+StringAgg
+---------
+
+Combines the values as the text. Fields are separated by a "separator".
+::
+
+   from django_extras.db.models.aggregates import StringAgg
+
+   Table.objects.aggregate(StringAgg('col1'))
+
+Database functions
+==================
+
+batch_qs
+--------
+
+Returns a (start, end, total, queryset) tuple for each batch in the given queryset.
+::
+
+   from django_extras.db.models import batch_qs
+
+   qs = Table.objects.all()
+   start, end, total, queryset = batch_qs(qs, 10)
+
+pg_version
+----------
+
+Return tuple with PostgreSQL version of a specific connection.
+::
+
+   from django_extras.db.models import pg_version
+
+   version = pg_version()
