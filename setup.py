@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name="django_extra_tools",
+    name="django-extra-tools",
     version='0.1.0b1',
     author='Tomasz Jakub Rup',
     author_email='tomasz.rup@gmail.com',
