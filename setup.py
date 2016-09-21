@@ -1,13 +1,11 @@
 from setuptools import setup, find_packages
 
-from django_extras import __version__, __author__, __email__, __license__
-
 
 setup(
     name="django_extras",
-    version=__version__,
-    author=__author__,
-    author_email=__email__,
+    version='0.1.0b1',
+    author='Tomasz Jakub Rup',
+    author_email='tomasz.rup@gmail.com',
     url='https://github.com/tomi77/django_extras',
     description='A set of functions related with Django',
     long_description=open("README.rst").read(),
@@ -30,7 +28,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
     ],
-    license=__license__,
+    license='MIT',
     install_requires=['Django >= 1.4.3'],
     packages=find_packages(exclude=['testapp']),
     package_data={
