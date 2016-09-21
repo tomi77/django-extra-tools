@@ -20,7 +20,8 @@ Quick start
 ===========
 
 Enable ``django-extras``
-::
+
+.. sourcecode:: python
 
    INSTALLED_APPS = [
        ...
@@ -33,7 +34,8 @@ Install SQL functions
    python manage.py migrate
 
 StringAgg aggregate function on Django 1.4 needs monkey patch
-::
+
+.. sourcecode:: python
 
    from django_extras.monkey import patch_django
 
@@ -89,7 +91,8 @@ First
 -----
 
 Returns the first non-NULL item.
-::
+
+.. sourcecode:: python
 
    from django_extras.db.models.aggregates import First
 
@@ -99,7 +102,8 @@ Last
 ----
 
 Returns the last non-NULL item.
-::
+
+.. sourcecode:: python
 
    from django_extras.db.models.aggregates import Last
 
@@ -109,7 +113,8 @@ Median
 ------
 
 Returns median value.
-::
+
+.. sourcecode:: python
 
    from django_extras.db.models.aggregates import Median
 
@@ -119,7 +124,8 @@ StringAgg
 ---------
 
 Combines the values as the text. Fields are separated by a "separator".
-::
+
+.. sourcecode:: python
 
    from django_extras.db.models.aggregates import StringAgg
 
@@ -132,7 +138,8 @@ batch_qs
 --------
 
 Returns a (start, end, total, queryset) tuple for each batch in the given queryset.
-::
+
+.. sourcecode:: python
 
    from django_extras.db.models import batch_qs
 
@@ -143,7 +150,8 @@ pg_version
 ----------
 
 Return tuple with PostgreSQL version of a specific connection.
-::
+
+.. sourcecode:: python
 
    from django_extras.db.models import pg_version
 
