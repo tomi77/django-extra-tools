@@ -1,13 +1,13 @@
-=============
-django-extras
-=============
+==================
+django-extra-tools
+==================
 
-.. image:: https://travis-ci.org/tomi77/django-extras.svg?branch=master
-   :target: https://travis-ci.org/tomi77/django-extras
-.. image:: https://coveralls.io/repos/github/tomi77/django-extras/badge.svg
-   :target: https://coveralls.io/github/tomi77/django-extras?branch=master
-.. image:: https://codeclimate.com/github/tomi77/django-extras/badges/gpa.svg
-   :target: https://codeclimate.com/github/tomi77/django-extras
+.. image:: https://travis-ci.org/tomi77/django-extra-tools.svg?branch=master
+   :target: https://travis-ci.org/tomi77/django-extra-tools
+.. image:: https://coveralls.io/repos/github/tomi77/django-extra-tools/badge.svg
+   :target: https://coveralls.io/github/tomi77/django-extra-tools?branch=master
+.. image:: https://codeclimate.com/github/tomi77/django-extra-tools/badges/gpa.svg
+   :target: https://codeclimate.com/github/tomi77/django-extra-tools
    :alt: Code Climate
 
 Installation
@@ -15,18 +15,18 @@ Installation
 
 .. sourcecode:: sh
 
-   pip install django-extras
+   pip install django-extra-tools
 
 Quick start
 ===========
 
-Enable ``django-extras``
+Enable ``django-extra-tools``
 
 .. sourcecode:: python
 
    INSTALLED_APPS = [
        ...
-       'django_extras',
+       'django_extra_tools',
    ]
 
 Install SQL functions
@@ -39,7 +39,7 @@ StringAgg aggregate function on Django 1.4 needs monkey patch
 
 .. sourcecode:: python
 
-   from django_extras.monkey import patch_django
+   from django_extra_tools.monkey import patch_django
 
    patch_all()
 
@@ -100,7 +100,7 @@ Returns the first non-NULL item.
 
 .. sourcecode:: python
 
-   from django_extras.db.models.aggregates import First
+   from django_extra_tools.db.models.aggregates import First
 
    Table.objects.aggregate(First('col1', order_by='col2'))
 
@@ -111,7 +111,7 @@ Returns the last non-NULL item.
 
 .. sourcecode:: python
 
-   from django_extras.db.models.aggregates import Last
+   from django_extra_tools.db.models.aggregates import Last
 
    Table.objects.aggregate(Last('col1', order_by='col2'))
 
@@ -122,7 +122,7 @@ Returns median value.
 
 .. sourcecode:: python
 
-   from django_extras.db.models.aggregates import Median
+   from django_extra_tools.db.models.aggregates import Median
 
    Table.objects.aggregate(Median('col1'))
 
@@ -133,7 +133,7 @@ Combines the values as the text. Fields are separated by a "separator".
 
 .. sourcecode:: python
 
-   from django_extras.db.models.aggregates import StringAgg
+   from django_extra_tools.db.models.aggregates import StringAgg
 
    Table.objects.aggregate(StringAgg('col1'))
 
@@ -147,7 +147,7 @@ Returns a (start, end, total, queryset) tuple for each batch in the given querys
 
 .. sourcecode:: python
 
-   from django_extras.db.models import batch_qs
+   from django_extra_tools.db.models import batch_qs
 
    qs = Table.objects.all()
    start, end, total, queryset = batch_qs(qs, 10)
@@ -159,7 +159,7 @@ Return tuple with PostgreSQL version of a specific connection.
 
 .. sourcecode:: python
 
-   from django_extras.db.models import pg_version
+   from django_extra_tools.db.models import pg_version
 
    version = pg_version()
 
@@ -173,7 +173,7 @@ An HTTP response class with the "download file" headers.
 
 .. sourcecode:: python
 
-   from django_extras.http import HttpResponseGetFile
+   from django_extra_tools.http import HttpResponseGetFile
 
    return HttpResponseGetFile(filename='file.txt', content=b'file content', content_type='file/text')
 
@@ -187,7 +187,7 @@ Get the client IP from the request.
 
 .. sourcecode:: python
 
-   from django_extras.wsgi_request import get_client_ip
+   from django_extra_tools.wsgi_request import get_client_ip
 
    ip = get_client_ip(request)
 
@@ -203,7 +203,7 @@ same time.
 
 .. sourcecode:: python
 
-   from django_extras.management import OneInstanceCommand
+   from django_extra_tools.management import OneInstanceCommand
 
    class MyCommand(OneInstanceCommand):
        name = 'mycommand'

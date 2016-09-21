@@ -2,11 +2,11 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name="django_extras",
+    name="django_extra_tools",
     version='0.1.0b1',
     author='Tomasz Jakub Rup',
     author_email='tomasz.rup@gmail.com',
-    url='https://github.com/tomi77/django_extras',
+    url='https://github.com/tomi77/django_extra_tools',
     description='A set of functions related with Django',
     long_description=open("README.rst").read(),
     classifiers=[
@@ -32,6 +32,6 @@ setup(
     install_requires=['Django >= 1.4.3'],
     packages=find_packages(exclude=['testapp']),
     package_data={
-        'django_extras': ['sql/*.sql'],
+        'django_extra_tools': ['sql/*.sql'],
     }
 )

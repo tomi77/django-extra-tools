@@ -1,4 +1,4 @@
-from django_extras.monkey import patch_django
+from django_extra_tools.monkey import patch_django
 
 
 patch_django()

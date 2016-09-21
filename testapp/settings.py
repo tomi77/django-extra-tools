@@ -17,7 +17,7 @@ DATABASES = {
 }
 
 INSTALLED_APPS = [
-    'django_extras',
+    'django_extra_tools',
     'testapp',
 ]
 if django.VERSION[:2] <= (1, 6):

@@ -1,9 +1,9 @@
 from django.http import HttpRequest
 from django.test import TestCase
 
-from django_extras.db import pg_version
-from django_extras.db.models.aggregates import First, Last, Median, StringAgg
-from django_extras.wsgi_request import get_client_ip
+from django_extra_tools.db import pg_version
+from django_extra_tools.db.models.aggregates import First, Last, Median, StringAgg
+from django_extra_tools.wsgi_request import get_client_ip
 from testapp.models import FirstLastTest, MedianTest, StringAggTest
 
 try:
