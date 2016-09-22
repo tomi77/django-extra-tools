@@ -211,3 +211,23 @@ same time.
        def handle_instance(self, *args, **kwargs):
            # some operations
 
+Middleware
+==========
+
+XhrMiddleware
+-------------
+
+This middleware allows cross-domain XHR using the html5 postMessage API.
+
+.. sourcecode:: python
+
+   MIDDLEWARE_CLASSES = (
+       ...
+       'django_extra_tools.middleware.XhrMiddleware'
+   )
+
+   XHR_MIDDLEWARE_ALLOWED_ORIGINS = '*'
+   XHR_MIDDLEWARE_ALLOWED_METHODS = ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE']
+   XHR_MIDDLEWARE_ALLOWED_HEADERS = ['Content-Type', 'Authorization', 'Location', '*']
+   XHR_MIDDLEWARE_ALLOWED_CREDENTIALS = 'true'
+   XHR_MIDDLEWARE_EXPOSE_HEADERS = ['Location']
