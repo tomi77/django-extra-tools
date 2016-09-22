@@ -12,4 +12,4 @@ engines:
     enabled: true
 ratings:
   paths:
-  - "django_extras/**.py"
+  - "django_extra_tools/**.py"
