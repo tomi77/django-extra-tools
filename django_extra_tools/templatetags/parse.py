@@ -8,22 +8,9 @@ except ImportError:
 register = Library()
 
 
-@register.filter('parse_datetime', expects_localtime=True)
-def parse_datetime_filter(value):
-    return parse_datetime(value)
-
-
-@register.filter('parse_date', expects_localtime=True)
-def parse_date_filter(value):
-    return parse_date(value)
-
-
-@register.filter('parse_time', expects_localtime=True)
-def parse_time_filter(value):
-    return parse_time(value)
-
+register.filter('parse_datetime', parse_datetime, expects_localtime=True)
+register.filter('parse_date', parse_date, expects_localtime=True)
+register.filter('parse_time', parse_time, expects_localtime=True)
 
 if parse_duration:
-    @register.filter('parse_duration')
-    def parse_duration_filter(value):
-        return parse_duration(value)
+    register.filter('parse_duration', parse_duration)
