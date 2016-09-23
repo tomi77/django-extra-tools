@@ -12,15 +12,15 @@ env:
     - DJANGO_VERSION=1.5.12
     - DJANGO_VERSION=1.6.11
     - DJANGO_VERSION=1.7.11
-    - DJANGO_VERSION=1.8.13
-    - DJANGO_VERSION=1.9.7
+    - DJANGO_VERSION=1.8.14
+    - DJANGO_VERSION=1.9.9
 
 python: 2.7
 
 matrix:
   include:
     - python: 3.5
-      env: DJANGO_VERSION=1.9.7
+      env: DJANGO_VERSION=1.9.9
 
 addons:
   postgresql: 9.4
