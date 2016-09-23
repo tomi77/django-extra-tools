@@ -1,0 +1,1 @@
+{% load parse %}{{ timestr|parse_time|date:"H:i:s" }}

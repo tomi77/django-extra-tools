@@ -20,5 +20,17 @@ INSTALLED_APPS = [
     'django_extra_tools',
     'testapp',
 ]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+    },
+]
+
+MIDDLEWARE_CLASSES = [
+    'django_extra_tools.middleware.XhrMiddleware'
+]
+
 if django.VERSION[:2] <= (1, 6):
     INSTALLED_APPS += ['south']

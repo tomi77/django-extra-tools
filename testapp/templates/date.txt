@@ -1,0 +1,1 @@
+{% load parse %}{{ datestr|parse_date|date:"Y-m-d" }}
