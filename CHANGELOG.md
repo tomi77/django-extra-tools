@@ -1,4 +1,4 @@
-## master
+## 0.2.0b1
 
 * Add `XhrMiddleware`
 * Fix for older Django (older Django does not have `django.utils.dateparse.parse_duration`)
