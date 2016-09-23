@@ -1,5 +1,9 @@
 from django.template import Library
-from django.utils.dateparse import parse_date, parse_datetime, parse_time, parse_duration
+from django.utils.dateparse import parse_date, parse_datetime, parse_time
+try:
+    from django.utils.dateparse import parse_duration
+except ImportError:
+    parse_duration = None
 
 register = Library()
 
@@ -19,6 +23,7 @@ def parse_time_filter(value):
     return parse_time(value)
 
 
-@register.filter('parse_duration')
-def parse_duration_filter(value):
-    return parse_duration(value)
+if parse_duration:
+    @register.filter('parse_duration')
+    def parse_duration_filter(value):
+        return parse_duration(value)
