@@ -6,7 +6,7 @@ setup(
     version='0.2.0b1',
     author='Tomasz Jakub Rup',
     author_email='tomasz.rup@gmail.com',
-    url='https://github.com/tomi77/django_extra_tools',
+    url='https://github.com/tomi77/django-extra-tools',
     description='A set of functions related with Django',
     long_description=open("README.rst").read(),
     classifiers=[
