@@ -1,3 +1,7 @@
+## master
+
+* Add `NagiosCheckCommand` management command
+
 ## 0.2.0b1
 
 * Add `XhrMiddleware`

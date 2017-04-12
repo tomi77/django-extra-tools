@@ -205,11 +205,24 @@ same time.
 
    from django_extra_tools.management import OneInstanceCommand
 
-   class MyCommand(OneInstanceCommand):
+   class Command(OneInstanceCommand):
        name = 'mycommand'
 
-       def handle_instance(self, *args, **kwargs):
+       def handle_instance(self, *args, **options):
            # some operations
+
+NagiosCheckCommand
+------------------
+
+A management command which perform a Nagios check.
+
+.. sourcecode:: python
+
+   from django_extra_tools.management import NagiosCheckCommand
+
+   class Command(NagiosCheckCommand):
+       def handle_nagios_check(self, *args, **options):
+           return self.STATE_OK, 'OK'
 
 Middleware
 ==========

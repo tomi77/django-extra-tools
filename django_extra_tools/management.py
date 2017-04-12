@@ -45,3 +45,31 @@ class OneInstanceCommand(BaseCommand):
         Perform the command action for cron task.
         """
         raise NotImplementedError()
+
+
+class NagiosCheckCommand(BaseCommand):
+    """
+    A management command which perform a Nagios check.
+    
+    Rather than implementing ``handle()``, subclasses must implement
+    ``handle_nagios_check()``, which will return a tuple `status`, `msg`.
+    """
+    STATE_OK = 0
+    STATE_WARNING = 1
+    STATE_CRITICAL = 2
+    STATE_UNKNOWN = 3
+    STATE_DEPENDENT = 4
+
+    def handle(self, *args, **options):
+        status, msg = self.handle_nagios_check(*args, **options)
+
+        if not msg.endswith('\n'):
+            msg = '%s\n' % msg
+        self.stdout.write(msg)
+        sys.exit(status)
+
+    def handle_nagios_check(self, *args, **options):
+        """
+        Perform the command action for Nagios check.
+        """
+        raise NotImplementedError()
