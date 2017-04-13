@@ -1,6 +1,7 @@
 ## master
 
 * Add `NagiosCheckCommand` management command
+* Add support for Django >= 1.10 for Aggregate functions
 
 ## 0.2.0b1
 
