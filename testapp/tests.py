@@ -1,12 +1,17 @@
+from datetime import datetime
+
+from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
 
 from django_extra_tools.db import pg_version
-from django_extra_tools.db.models.aggregates import First, Last, Median, StringAgg
+from django_extra_tools.db.models.aggregates import First, Last, Median, \
+    StringAgg
 from django_extra_tools.templatetags.parse import parse_duration
 from django_extra_tools.wsgi_request import get_client_ip
-from testapp.models import FirstLastTest, MedianTest, StringAggTest
+from testapp.models import FirstLastTest, MedianTest, StringAggTest, \
+    TimestampableTest
 
 try:
     from unittest import mock
@@ -166,3 +171,46 @@ if parse_duration is not None:
         def test_incorrect_duration(self):
             tpl = render_to_string('duration.txt', {'durationstr': 'not a duration'})
             self.assertEqual(tpl, 'None')
+
+
+class TimestampableTestCase(TestCase):
+    fixtures = ['timestampable']
+
+    def setUp(self):
+        user = User.objects.get(pk=1)
+        self.obj = TimestampableTest.objects.create(name='1', created_by=user)
+
+    def test_created_at(self):
+        self.assertIsInstance(self.obj.created_at, datetime)
+
+    def test_updated_at(self):
+        # self.assertIsNone(self.obj.updated_at)
+        self.obj.name = 'update'
+        self.obj.save()
+        self.assertIsInstance(self.obj.updated_at, datetime)
+
+    def test_deleted_at(self):
+        self.assertIsNone(self.obj.deleted_at)
+        self.obj.delete()
+        self.assertIsInstance(self.obj.deleted_at, datetime)
+
+    def test_created_by(self):
+        self.assertIsInstance(self.obj.created_by, User)
+
+    def test_updated_by(self):
+        user = User.objects.get(pk=2)
+
+        self.assertIsNone(self.obj.updated_by)
+        self.obj.name = 'delete'
+        self.obj.save_by(user)
+        self.assertIsInstance(self.obj.updated_by, User)
+        self.assertEqual(self.obj.updated_by, user)
+
+    def test_deleted_by(self):
+        user = User.objects.get(pk=3)
+
+        self.assertIsNone(self.obj.deleted_by)
+        self.obj.delete_by(user)
+        self.assertIsInstance(self.obj.deleted_by, User)
+        self.assertEqual(self.obj.deleted_by, user)
+        self.assertIsInstance(self.obj.deleted_at, datetime)

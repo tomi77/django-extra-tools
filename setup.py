@@ -39,6 +39,9 @@ setup(
     install_requires=['Django >= 1.4.3'],
     packages=find_packages(exclude=['testapp']),
     package_data={
-        'django_extra_tools': ['sql/*.sql'],
+        'django_extra_tools': [
+            'locale/pl/LC_MESSAGES/*',
+            'sql/*.sql',
+        ],
     }
 )

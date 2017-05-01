@@ -1,0 +1,12 @@
+- pk: 1
+  model: 'auth.User'
+  fields:
+    username: 'user1'
+- pk: 2
+  model: 'auth.User'
+  fields:
+    username: 'user2'
+- pk: 3
+  model: 'auth.User'
+  fields:
+    username: 'user3'

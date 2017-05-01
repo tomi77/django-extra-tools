@@ -137,6 +137,136 @@ Combines the values as the text. Fields are separated by a "separator".
 
    Table.objects.aggregate(StringAgg('col1'))
 
+Model mixins
+============
+
+CreatedAtMixin
+--------------
+
+Add ``created_at`` field to model.
+
+.. sourcecode:: python
+
+   from django.db import models
+   from django_extra_tools.db.models import timestampable
+
+   class MyModel(timestampable.CreatedAtMixin, models.Model):
+       pass
+
+   model = MyModel()
+   print(model.created_at)
+
+CreatedByMixin
+--------------
+
+Add ``created_by`` field to model.
+
+.. sourcecode:: python
+
+   from django.contrib.auth.models import User
+   from django.db import models
+   from django_extra_tools.db.models import timestampable
+
+   class MyModel(timestampable.CreatedByMixin, models.Model):
+       pass
+
+   user = User.objects.get(username='user')
+   model = MyModel(created_by=user)
+   print(model.created_by)
+
+UpdatedAtMixin
+--------------
+
+Add ``updated_at`` field to model.
+
+.. sourcecode:: python
+
+   from django.db import models
+   from django_extra_tools.db.models import timestampable
+
+   class MyModel(timestampable.UpdatedAtMixin, models.Model):
+       operation = models.CharField(max_length=10)
+
+   model = MyModel()
+   print(model.updated_at)
+   model.operation = 'update'
+   model.save()
+   print(model.updated_at)
+
+UpdatedByMixin
+--------------
+
+Add ``updated_by`` field to model.
+
+.. sourcecode:: python
+
+   from django.contrib.auth.models import User
+   from django.db import models
+   from django_extra_tools.db.models import timestampable
+
+   class MyModel(timestampable.UpdatedByMixin, models.Model):
+       operation = models.CharField(max_length=10)
+
+   user = User.objects.get(username='user')
+   model = MyModel()
+   print(model.updated_by)
+   model.operation = 'update'
+   model.save_by(user)
+   print(model.updated_by)
+
+DeletedAtMixin
+--------------
+
+Add ``deleted_at`` field to model.
+
+.. sourcecode:: python
+
+   from django.db import models
+   from django_extra_tools.db.models import timestampable
+
+   class MyModel(timestampable.DeletedAtMixin, models.Model):
+       pass
+
+   model = MyModel()
+   print(model.deleted_at)
+   model.delete()
+   print(model.deleted_at)
+
+DeletedByMixin
+--------------
+
+Add ``deleted_by`` field to model.
+
+.. sourcecode:: python
+
+   from django.contrib.auth.models import User
+   from django.db import models
+   from django_extra_tools.db.models import timestampable
+
+   class MyModel(timestampable.DeletedByMixin, models.Model):
+       pass
+
+   user = User.objects.get(username='user')
+   model = MyModel()
+   print(model.deleted_by)
+   model.delete_by(user)
+   print(model.deleted_by)
+
+CreatedMixin
+------------
+
+Add ``created_at`` and ``created_by`` fields to model.
+
+UpdatedMixin
+------------
+
+Add ``updated_at`` and ``updated_by`` fields to model.
+
+DeletedMixin
+------------
+
+Add ``deleted_at`` and ``deleted_by`` fields to model.
+
 Database functions
 ==================
 
