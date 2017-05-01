@@ -1,6 +1,7 @@
 """A set of timestampable model mixins"""
 from __future__ import unicode_literals
 
+import django
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -54,7 +55,10 @@ class UpdatedByMixin(models.Model):
     def save_by(self, user, force_insert=False, force_update=False, using=None,
                 update_fields=None):
         self.updated_by = user
-        return self.save(force_insert, force_update, using, update_fields)
+        if django.VERSION[:2] > (1, 4):
+            return self.save(force_insert, force_update, using, update_fields)
+        else:
+            return self.save(force_insert, force_update, using)
 
 
 class DeletedAtMixin(models.Model):
