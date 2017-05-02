@@ -42,6 +42,6 @@ before_script:
   - ./travis_syncdb.sh
   - python manage.py migrate
 
-script: coverage run manage.py test testapp
+script: coverage run manage.py test tests
 
 after_success: coveralls

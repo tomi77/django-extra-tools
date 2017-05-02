@@ -1,23 +1,23 @@
 -
-  model: 'testapp.FirstLastTest'
+  model: 'tests.FirstLastTest'
   pk: 1
   fields:
     ts: '2016-01-03'
     val: 25
 -
-  model: 'testapp.FirstLastTest'
+  model: 'tests.FirstLastTest'
   pk: 2
   fields:
     ts: '2016-01-02'
     val: 20
 -
-  model: 'testapp.FirstLastTest'
+  model: 'tests.FirstLastTest'
   pk: 3
   fields:
     ts: '2016-01-04'
     val: 15
 -
-  model: 'testapp.FirstLastTest'
+  model: 'tests.FirstLastTest'
   pk: 4
   fields:
     ts: '2016-01-01'

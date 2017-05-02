@@ -44,9 +44,9 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Last update date', null=True)),
                 ('deleted_at', models.DateTimeField(null=True, verbose_name='Delete date', blank=True)),
                 ('name', models.CharField(max_length=10)),
-                ('created_by', models.ForeignKey(related_name='testapp_timestampabletest_created', db_column='created_by', blank=True, to=settings.AUTH_USER_MODEL)),
-                ('deleted_by', models.ForeignKey(related_name='testapp_timestampabletest_deleted', db_column='deleted_by', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
-                ('updated_by', models.ForeignKey(related_name='testapp_timestampabletest_updated', db_column='updated_by', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('created_by', models.ForeignKey(related_name='tests_timestampabletest_created', db_column='created_by', blank=True, to=settings.AUTH_USER_MODEL)),
+                ('deleted_by', models.ForeignKey(related_name='tests_timestampabletest_deleted', db_column='deleted_by', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('updated_by', models.ForeignKey(related_name='tests_timestampabletest_updated', db_column='updated_by', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'abstract': False,

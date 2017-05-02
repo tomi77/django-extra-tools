@@ -37,7 +37,8 @@ setup(
     ],
     license='MIT',
     install_requires=['Django >= 1.4.3'],
-    packages=find_packages(exclude=['testapp']),
+    packages=find_packages(exclude=['tests']),
+    include_package_data=True,
     package_data={
         'django_extra_tools': [
             'locale/pl/LC_MESSAGES/*',

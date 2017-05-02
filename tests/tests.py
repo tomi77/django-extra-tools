@@ -10,7 +10,8 @@ from django_extra_tools.db.models.aggregates import First, Last, Median, \
     StringAgg
 from django_extra_tools.templatetags.parse import parse_duration
 from django_extra_tools.wsgi_request import get_client_ip
-from testapp.models import FirstLastTest, MedianTest, StringAggTest, \
+
+from .models import FirstLastTest, MedianTest, StringAggTest, \
     TimestampableTest
 
 try:

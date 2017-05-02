@@ -1,1 +1,1 @@
-exclude testapp/**
+exclude tests/**

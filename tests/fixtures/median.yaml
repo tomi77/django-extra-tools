@@ -1,29 +1,29 @@
 -
-  model: 'testapp.MedianTest'
+  model: 'tests.MedianTest'
   pk: 1
   fields:
     val_int: 25
     val_float: 25.0
 -
-  model: 'testapp.MedianTest'
+  model: 'tests.MedianTest'
   pk: 2
   fields:
     val_int: 20
     val_float: 20.0
 -
-  model: 'testapp.MedianTest'
+  model: 'tests.MedianTest'
   pk: 3
   fields:
     val_int: 15
     val_float: 15.0
 -
-  model: 'testapp.MedianTest'
+  model: 'tests.MedianTest'
   pk: 4
   fields:
     val_int: 10
     val_float: 10.0
 -
-  model: 'testapp.MedianTest'
+  model: 'tests.MedianTest'
   pk: 5
   fields:
     val_int: 10
