@@ -1,1 +1,3 @@
-exclude tests/**
+prune tests
+recursive-include django_extra_tools/sql *.sql
+recursive-include django_extra_tools/locale *.[p|m]o

@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name="django-extra-tools",
+    name='django-extra-tools',
     version='0.2.0b1',
     author='Tomasz Jakub Rup',
     author_email='tomasz.rup@gmail.com',
     url='https://github.com/tomi77/django-extra-tools',
     description='A set of functions related with Django',
-    long_description=open("README.rst").read(),
+    long_description=open('README.rst').read(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Django',
@@ -37,12 +37,6 @@ setup(
     ],
     license='MIT',
     install_requires=['Django >= 1.4.3'],
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
-    package_data={
-        'django_extra_tools': [
-            'locale/pl/LC_MESSAGES/*',
-            'sql/*.sql',
-        ],
-    }
 )
