@@ -1,6 +1,6 @@
 # django-extra-tools polish translation.
 # Copyright (C) 2017 Tomasz Jakub Rup
-# This file is distributed under the same license as the django-chat package.
+# This file is distributed under the same license as the django-extra-tools package.
 # Tomasz Jakub Rup <tomasz.rup@gmail.com>, 2017.
 #
 #, fuzzy
