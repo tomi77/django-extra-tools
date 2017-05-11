@@ -15,18 +15,18 @@ env:
     - DJANGO_VERSION=1.8.18
     - DJANGO_VERSION=1.9.13
     - DJANGO_VERSION=1.10.7
-    - DJANGO_VERSION=1.11
+    - DJANGO_VERSION=1.11.1
 
 python: 2.7
 
 matrix:
   include:
     - python: 3.4
-      env: DJANGO_VERSION=1.11
+      env: DJANGO_VERSION=1.11.1
     - python: 3.5
-      env: DJANGO_VERSION=1.11
+      env: DJANGO_VERSION=1.11.1
     - python: 3.6
-      env: DJANGO_VERSION=1.11
+      env: DJANGO_VERSION=1.11.1
 
 addons:
   postgresql: 9.4
