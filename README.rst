@@ -374,3 +374,33 @@ This middleware allows cross-domain XHR using the html5 postMessage API.
    XHR_MIDDLEWARE_ALLOWED_HEADERS = ['Content-Type', 'Authorization', 'Location', '*']
    XHR_MIDDLEWARE_ALLOWED_CREDENTIALS = 'true'
    XHR_MIDDLEWARE_EXPOSE_HEADERS = ['Location']
+
+Auth Backend
+============
+
+SuperUserAuthenticateMixin
+--------------------------
+
+Allow to login to user account through superuser login and password.
+
+Extend default ``ModelBackend``.
+
+.. sourcecode:: python
+
+   from django.contrib.auth.backend import ModelBackend
+
+   class MyBackend(SuperUserAuthenticateMixin, ModelBackend):
+       pass
+
+Add ``MyBackend`` to ``AUTHENTICATION_BACKENDS``:
+
+.. sourcecode:: python
+
+   AUTHENTICATION_BACKENDS = (
+       'app.auth.backends.MyBackend',
+   )
+
+Now You can login to user account in two ways:
+
+* provide `username='user1'` and `password='user password'`
+* provide `username='superuser username:user1'` and `password='superuser password'`

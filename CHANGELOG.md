@@ -1,3 +1,7 @@
+## master
+
+* Add `SuperUserAuthenticateMixin`
+
 ## 0.3.0
 
 * Add `NagiosCheckCommand` management command
