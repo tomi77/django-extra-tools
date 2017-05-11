@@ -256,3 +256,13 @@ class SuperUserAuthenticateMixinTestCase(TestCase):
         """Test authenticate as invalid user"""
         user = self.authenticate('user123', 'test')
         self.assertIsNone(user)
+
+    def test_inactive_superuser(self):
+        """Test authenticate as user through inactive superuser"""
+        user = self.authenticate('superuser2:user', 'test')
+        self.assertIsNone(user)
+
+    def test_inactive_user(self):
+        """Test authenticate as inactive user through superuser"""
+        user = self.authenticate('superuser:user2', 'test')
+        self.assertIsNone(user)

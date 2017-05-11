@@ -11,7 +11,8 @@ class SuperUserAuthenticateMixin(object):
             return self._authenticate(username=username, password=password)
     else:
         def authenticate(self, request=None, username=None, password=None):
-            return self._authenticate(request=request, username=username, password=password)
+            return self._authenticate(request=request, username=username,
+                                      password=password)
 
     def _authenticate(self, **kwargs):
         user = super(SuperUserAuthenticateMixin, self) \
@@ -27,7 +28,8 @@ class SuperUserAuthenticateMixin(object):
 
         kwargs['username'] = superuser_username
         superuser = self.authenticate(**kwargs)
-        if not superuser.is_superuser:
+        if superuser is None or not superuser.is_active or \
+                not superuser.is_superuser:
             return None
 
         return self._fetch_user(username)

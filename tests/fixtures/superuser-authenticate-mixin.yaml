@@ -14,3 +14,19 @@
     is_active: true
     is_superuser: true
     is_staff: true
+- pk: 3
+  model: 'auth.User'
+  fields:
+    username: 'superuser2'
+    password: 'pbkdf2_sha256$10000$vkRy7QauoLLj$ry+3xm3YX+YrSXbri8s3EcXDIrx5ceM+xQjtpLdw2oE='
+    is_active: false
+    is_superuser: true
+    is_staff: true
+- pk: 4
+  model: 'auth.User'
+  fields:
+    username: 'user2'
+    password: 'pbkdf2_sha256$10000$vkRy7QauoLLj$ry+3xm3YX+YrSXbri8s3EcXDIrx5ceM+xQjtpLdw2oE='
+    is_active: false
+    is_superuser: false
+    is_staff: false
