@@ -1,6 +1,8 @@
 import django
 from django.contrib.auth.models import User
 
+from django_extra_tools.conf import settings
+
 
 class SuperUserAuthenticateMixin(object):
     """
@@ -22,7 +24,8 @@ class SuperUserAuthenticateMixin(object):
 
         username = kwargs.get('username')
         try:
-            superuser_username, username = username.split(':')
+            separator = settings.AUTH_BACKEND_USERNAME_SEPARATOR
+            superuser_username, username = username.split(separator)
         except ValueError:
             return None
 
