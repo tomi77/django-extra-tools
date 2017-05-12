@@ -268,7 +268,7 @@ class SuperUserAuthenticateMixinTestCase(TestCase):
         user = self.authenticate('superuser:user2', 'test')
         self.assertIsNone(user)
 
-    @override_settings(AUTH_BACKEND_SUPERUSER_SEPARATOR='@')
+    @override_settings(AUTH_BACKEND_USERNAME_SEPARATOR='@')
     def test_separator(self):
         """Test authenticate as user through superuser username and password and @ as separator"""
         user = self.authenticate('superuser@user', 'test')

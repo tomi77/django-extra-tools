@@ -404,7 +404,7 @@ Optionally You can configure username separator (default is colon):
 
 .. sourcecode:: python
 
-   AUTH_BACKEND_SUPERUSER_SEPARATOR = ':'
+   AUTH_BACKEND_USERNAME_SEPARATOR = ':'
 
 Now You can login to user account in two ways:
 
