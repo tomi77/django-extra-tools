@@ -1,10 +1,11 @@
 import django
+from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 
 from django_extra_tools.conf import settings
 
 
-class SuperUserAuthenticateMixin(object):
+class ThroughSuperuserModelBackend(ModelBackend):
     """
     Allow to login to user account through superuser login and password.
     """
@@ -17,11 +18,6 @@ class SuperUserAuthenticateMixin(object):
                                       password=password)
 
     def _authenticate(self, **kwargs):
-        user = super(SuperUserAuthenticateMixin, self) \
-            .authenticate(**kwargs)
-        if user is not None:
-            return user
-
         username = kwargs.get('username')
         try:
             separator = settings.AUTH_BACKEND_USERNAME_SEPARATOR
@@ -30,15 +26,15 @@ class SuperUserAuthenticateMixin(object):
             return None
 
         kwargs['username'] = superuser_username
-        superuser = self.authenticate(**kwargs)
-        if superuser is None or not superuser.is_active or \
-                not superuser.is_superuser:
+        superuser = super(ThroughSuperuserModelBackend, self).authenticate(**kwargs)
+
+        if superuser is None or not superuser.is_superuser:
             return None
 
-        return self._fetch_user(username)
-
-    def _fetch_user(self, username):
         try:
-            return User.objects.get(username=username, is_active=True)
+            user = User.objects.get(username=username)
+            if hasattr(self, 'user_can_authenticate'):
+                return user if self.user_can_authenticate(user) else None
+            return user
         except User.DoesNotExist:
             return None

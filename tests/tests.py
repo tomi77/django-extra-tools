@@ -1,14 +1,13 @@
 from datetime import datetime
 
 import django
-from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
 from django.test.utils import override_settings
 
-from django_extra_tools.auth.backends import SuperUserAuthenticateMixin
+from django_extra_tools.auth.backends import ThroughSuperuserModelBackend
 from django_extra_tools.db import pg_version
 from django_extra_tools.db.models.aggregates import First, Last, Median, \
     StringAgg
@@ -221,13 +220,10 @@ class TimestampableTestCase(TestCase):
         self.assertIsInstance(self.obj.deleted_at, datetime)
 
 
-class SuperUserAuthenticateMixinTestCase(TestCase):
-    fixtures = ['superuser-authenticate-mixin']
+class ThroughSuperuserModelBackendTestCase(TestCase):
+    fixtures = ['through-superuser-model-backend']
 
-    class MyBackend(SuperUserAuthenticateMixin, ModelBackend):
-        pass
-
-    backend = MyBackend()
+    backend = ThroughSuperuserModelBackend()
 
     def authenticate(self, username, password):
         if django.VERSION[:2] < (1, 11):
@@ -235,37 +231,15 @@ class SuperUserAuthenticateMixinTestCase(TestCase):
         else:
             return self.backend.authenticate(None, username, password)
 
-    def test_user(self):
-        """Test authenticate as user"""
-        user = self.authenticate('user', 'test')
-        self.assertIsInstance(user, User)
-        self.assertEqual(user.username, 'user')
-
-    def test_superuser(self):
-        """Test authenticate as superuser"""
-        user = self.authenticate('superuser', 'test')
-        self.assertIsInstance(user, User)
-        self.assertEqual(user.username, 'superuser')
-
     def test_user_through_superuser(self):
         """Test authenticate as user through superuser username and password"""
         user = self.authenticate('superuser:user', 'test')
         self.assertIsInstance(user, User)
         self.assertEqual(user.username, 'user')
 
-    def test_unknown(self):
-        """Test authenticate as invalid user"""
-        user = self.authenticate('user123', 'test')
-        self.assertIsNone(user)
-
-    def test_inactive_superuser(self):
-        """Test authenticate as user through inactive superuser"""
+    def test_unknown_superuser(self):
+        """Test authenticate as user through unknown superuser"""
         user = self.authenticate('superuser2:user', 'test')
-        self.assertIsNone(user)
-
-    def test_inactive_user(self):
-        """Test authenticate as inactive user through superuser"""
-        user = self.authenticate('superuser:user2', 'test')
         self.assertIsNone(user)
 
     @override_settings(AUTH_BACKEND_USERNAME_SEPARATOR='@')
