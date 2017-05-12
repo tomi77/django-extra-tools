@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
+from django.test.utils import override_settings
 
 from django_extra_tools.auth.backends import SuperUserAuthenticateMixin
 from django_extra_tools.db import pg_version
@@ -266,3 +267,10 @@ class SuperUserAuthenticateMixinTestCase(TestCase):
         """Test authenticate as inactive user through superuser"""
         user = self.authenticate('superuser:user2', 'test')
         self.assertIsNone(user)
+
+    @override_settings(AUTH_BACKEND_SUPERUSER_SEPARATOR='@')
+    def test_separator(self):
+        """Test authenticate as user through superuser username and password and @ as separator"""
+        user = self.authenticate('superuser@user', 'test')
+        self.assertIsInstance(user, User)
+        self.assertEqual(user.username, 'user')

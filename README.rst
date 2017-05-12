@@ -400,6 +400,12 @@ Add ``MyBackend`` to ``AUTHENTICATION_BACKENDS``:
        'app.auth.backends.MyBackend',
    )
 
+Optionally You can configure username separator (default is colon):
+
+.. sourcecode:: python
+
+   AUTH_BACKEND_SUPERUSER_SEPARATOR = ':'
+
 Now You can login to user account in two ways:
 
 * provide `username='user1'` and `password='user password'`
