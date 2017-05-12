@@ -8,7 +8,6 @@ if django.VERSION[:2] <= (1, 7):
 
     from .sql import aggregates as base_aggregates_module
 
-
     class Aggregate(BaseAggregate):
         aggregates_module = base_aggregates_module
 

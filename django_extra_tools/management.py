@@ -50,7 +50,7 @@ class OneInstanceCommand(BaseCommand):
 class NagiosCheckCommand(BaseCommand):
     """
     A management command which perform a Nagios check.
-    
+
     Rather than implementing ``handle()``, subclasses must implement
     ``handle_nagios_check()``, which will return a tuple `status`, `msg`.
     """
