@@ -1,4 +1,4 @@
-PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
+from django_extra_tools.conf import settings
 
 
 def get_client_ip(request):
@@ -14,8 +14,8 @@ def get_client_ip(request):
     if x_forwarded_for:
         proxies = x_forwarded_for.split(',')
         # remove the private ips from the beginning
-        while len(proxies) > 0 and proxies[0].startswith(PRIVATE_IPS_PREFIX):
-            proxies.pop(0)
+        proxies = [proxy for proxy in proxies
+                   if not proxy.startswith(settings.PRIVATE_IPS_PREFIX)]
         # take the first ip which is not a private one (of a proxy)
         if len(proxies) > 0:
             ip = proxies[0]

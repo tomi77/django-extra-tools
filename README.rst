@@ -321,6 +321,12 @@ Get the client IP from the request.
 
    ip = get_client_ip(request)
 
+You can configure list of local IP's by setting ``PRIVATE_IPS_PREFIX``
+
+.. sourcecode:: python
+
+   PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
+
 Management
 ==========
 

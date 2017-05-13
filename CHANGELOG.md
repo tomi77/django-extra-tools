@@ -1,6 +1,7 @@
 ## master
 
 * Add `ThroughSuperuserModelBackend`
+* Make list of local IP's for ``get_client_ip`` configurable
 
 ## 0.3.0
 
