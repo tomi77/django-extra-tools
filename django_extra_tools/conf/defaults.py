@@ -1,6 +1,6 @@
 """Default configuration"""
 
-# auth.backends.SuperUserAuthenticateMixin username separator
+# auth.backends.ThroughSuperuserModelBackend username separator
 AUTH_BACKEND_USERNAME_SEPARATOR = ':'
 
 XHR_MIDDLEWARE_ALLOWED_ORIGINS = '*'
