@@ -10,6 +10,65 @@ django-extra-tools
    :target: https://codeclimate.com/github/tomi77/django-extra-tools
    :alt: Code Climate
 
+Table of contents
+=================
+
+* `Installation`_
+
+* `Quick start`_
+
+* `Template filters`_
+
+  * `parse_datetime`_
+  * `parse_date`_
+  * `parse_time`_
+  * `parse_duration`_
+
+* `Aggregation`_
+
+  * `First`_
+  * `Last`_
+  * `Median`_
+  * `StringAgg`_
+
+* `Model mixins`_
+
+  * `CreatedAtMixin`_
+  * `CreatedByMixin`_
+  * `UpdatedAtMixin`_
+  * `UpdatedByMixin`_
+  * `DeletedAtMixin`_
+  * `DeletedByMixin`_
+  * `CreatedMixin`_
+  * `UpdatedMixin`_
+  * `DeletedMixin`_
+
+* `Database functions`_
+
+  * `batch_qs`_
+  * `pg_version`_
+
+* `HTTP Response`_
+
+  * `HttpResponseGetFile`_
+
+* `WSGI Request`_
+
+  * `get_client_ip`_
+
+* `Management`_
+
+  * `OneInstanceCommand`_
+  * `NagiosCheckCommand`_
+
+* `Middleware`_
+
+  * `XhrMiddleware`_
+
+* `Auth Backend`_
+
+  * `ThroughSuperuserModelBackend`_
+
 Installation
 ============
 
