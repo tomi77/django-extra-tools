@@ -1,17 +1,18 @@
 ## master
 
-* Add `ThroughSuperuserModelBackend`
+* Added `ThroughSuperuserModelBackend`
 * Make list of local IP's for ``get_client_ip`` configurable
+* Added `lock` function that uses `FileLocker` or `CacheLocker` to lock multiple script executions
 
 ## 0.3.0
 
-* Add `NagiosCheckCommand` management command
-* Add support for Django >= 1.10 for Aggregate functions
-* Add `timestampable` model mixins
+* Added `NagiosCheckCommand` management command
+* Added support for Django >= 1.10 for Aggregate functions
+* Added `timestampable` model mixins
 
 ## 0.2.0b1
 
-* Add `XhrMiddleware`
+* Added `XhrMiddleware`
 * Fix for older Django (older Django does not have `django.utils.dateparse.parse_duration`)
 
 ## 0.1.0b2

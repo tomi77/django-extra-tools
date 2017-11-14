@@ -69,6 +69,11 @@ Table of contents
 
   * `ThroughSuperuserModelBackend`_
 
+* `Lockers`_
+
+  * `FileLocker`_
+  * `CacheLocker`_
+
 Installation
 ============
 
@@ -467,3 +472,48 @@ Now You can login to user account in two ways:
 
 * provide `username='user1'` and `password='user password'`
 * provide `username='superuser username:user1'` and `password='superuser password'`
+
+Lockers
+=======
+
+Function to set lock hook.
+
+.. sourcecode:: python
+
+   from django_extra_tools.lockers import lock
+
+   lock('unique_lock_name')
+
+Next usage of `lock` on the same lock name raises ``LockError`` exception.
+
+You can configure locker mechanism through ``DEFAULT_LOCKER_CLASS`` settings or directly:
+
+.. sourcecode:: python
+
+   from django_extra_tools.lockers import FileLocker
+
+   lock = FileLocker()('unique_lock_name')
+
+FileLocker
+----------
+
+This is a default locker.
+
+This locker creates a `unique_lock_name.lock` file in temp directory.
+
+You can configure this locker through settings:
+
+.. sourcecode:: python
+
+   DEFAULT_LOCKER_CLASS = 'django_extra_tools.lockers.FileLocker'
+
+CacheLocker
+-----------
+
+This locker creates a `locker-unique_lock_name` key in cache.
+
+You can configure this locker through settings:
+
+.. sourcecode:: python
+
+   DEFAULT_LOCKER_CLASS = 'django_extra_tools.lockers.CacheLocker'
