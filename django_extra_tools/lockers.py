@@ -1,10 +1,10 @@
 import atexit
 import os
 import tempfile
+from importlib import import_module
 
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.importlib import import_module
 
 from django_extra_tools.conf import settings
 
@@ -17,18 +17,17 @@ def get_locker_class(import_path=None):
     if import_path is None:
         import_path = settings.DEFAULT_LOCKER_CLASS
     try:
-        dot = import_path.rindex('.')
+        module_path, class_name = import_path.rsplit('.', 1)
     except ValueError:
         raise ImproperlyConfigured("{} isn't a locker module.".format(import_path))
-    module, classname = import_path[:dot], import_path[dot+1:]
     try:
-        mod = import_module(module)
+        module = import_module(module_path)
     except ImportError as e:
-        raise ImproperlyConfigured('Error importing locker module %s: "%s"' % (module, e))
+        raise ImproperlyConfigured('Error importing locker module %s: "%s"' % (module_path, e))
     try:
-        return getattr(mod, classname)
+        return getattr(module, class_name)
     except AttributeError:
-        raise ImproperlyConfigured('Locker module "%s" does not define a "%s" class.' % (module, classname))
+        raise ImproperlyConfigured('Locker module "%s" does not define a "%s" class.' % (module_path, class_name))
 
 
 class FileLocker(object):
