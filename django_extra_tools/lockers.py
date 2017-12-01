@@ -41,8 +41,15 @@ class FileLocker(object):
             fd = os.open(filename, os.O_CREAT | os.O_EXCL)
 
             def register():
-                os.close(fd)
-                os.remove(filename)
+                try:
+                    os.close(fd)
+                except OSError:
+                    pass
+
+                try:
+                    os.remove(filename)
+                except OSError:
+                    pass
 
             atexit.register(register)
         except OSError:
