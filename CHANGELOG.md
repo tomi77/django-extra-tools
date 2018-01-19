@@ -4,7 +4,7 @@
 * Make list of local IP's for ``get_client_ip`` configurable
 * Added `lock` function that uses `FileLocker` or `CacheLocker` to lock multiple script executions
 * Added post migrate hook to create `view_*` permissions for all content types
-* Remove support for Django < 1.7
+* Removed support for Django < 1.7
 
 ## 0.3.0
 
