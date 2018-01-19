@@ -12,5 +12,3 @@ XHR_MIDDLEWARE_EXPOSE_HEADERS = ['Location']
 PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
 
 DEFAULT_LOCKER_CLASS = 'django_extra_tools.lockers.FileLocker'
-
-CREATE_VIEW_PERMISSIONS = False

@@ -483,11 +483,15 @@ Permissions
 view_(content_types) permissions
 --------------------------------
 
-To create `Can view [content type name]` permissions for all content types just add to settings
+To create "Can view [content type name]" permissions for all content types just add
+``django_extra_tools.auth.view_permissions`` at the end of ``INSTALLED_APPS``
 
 .. sourcecode:: python
 
-   CREATE_VIEW_PERMISSIONS = True
+   INSTALLED_APPS = [
+       …
+       'django_extra_tools.auth.view_permissions'
+   ]
 
 and run migration `./manage.py migrate`
 

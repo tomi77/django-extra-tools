@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django_extra_tools',
     'tests',
+    'django_extra_tools.auth.view_permissions'
 ]
 
 TEMPLATES = [
@@ -33,8 +34,6 @@ TEMPLATES = [
 MIDDLEWARE_CLASSES = [
     'django_extra_tools.middleware.XhrMiddleware'
 ]
-
-CREATE_VIEW_PERMISSIONS = True
 
 if django.VERSION[:2] <= (1, 6):
     INSTALLED_APPS += ['south']
