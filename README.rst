@@ -485,7 +485,11 @@ To create "Can view [content type name]" permissions for all content types just 
        'django_extra_tools.auth.view_permissions'
    ]
 
-and run migration `./manage.py migrate`
+and run migration
+
+.. sourcecode:: sh
+
+   python manage.py migrate
 
 Lockers
 =======
