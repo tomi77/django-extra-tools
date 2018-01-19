@@ -8,9 +8,6 @@ env:
     - DATABASE_HOST=127.0.0.1
     - DATABASE_PORT=5432
   matrix:
-    - DJANGO_VERSION=1.4.22
-    - DJANGO_VERSION=1.5.12
-    - DJANGO_VERSION=1.6.11
     - DJANGO_VERSION=1.7.11
     - DJANGO_VERSION=1.8.18
     - DJANGO_VERSION=1.9.13
@@ -39,7 +36,6 @@ install:
   - pip install --upgrade mock
 
 before_script:
-  - ./travis_syncdb.sh
   - python manage.py migrate
 
 script: coverage run manage.py test tests

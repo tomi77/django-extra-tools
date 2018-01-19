@@ -93,7 +93,7 @@ Enable ``django-extra-tools``
 .. sourcecode:: python
 
    INSTALLED_APPS = [
-       ...
+       …
        'django_extra_tools',
    ]
 
@@ -102,14 +102,6 @@ Install SQL functions
 .. sourcecode:: sh
 
    python manage.py migrate
-
-StringAgg aggregate function on Django 1.4 needs monkey patch
-
-.. sourcecode:: python
-
-   from django_extra_tools.monkey import patch_django
-
-   patch_all()
 
 Template filters
 ================

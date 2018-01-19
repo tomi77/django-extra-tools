@@ -55,10 +55,7 @@ class UpdatedByMixin(models.Model):
     def save_by(self, user, force_insert=False, force_update=False, using=None,
                 update_fields=None):
         self.updated_by = user
-        if django.VERSION[:2] > (1, 4):
-            return self.save(force_insert, force_update, using, update_fields)
-        else:
-            return self.save(force_insert, force_update, using)
+        return self.save(force_insert, force_update, using, update_fields)
 
 
 class DeletedAtMixin(models.Model):
