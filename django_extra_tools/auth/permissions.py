@@ -1,14 +1,14 @@
 from __future__ import print_function
 
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import Permission
-
 
 def add_view_permissions(sender, verbosity, **kwargs):
     """
     This post_syncdb/post_migrate hooks takes care of adding a view permission too all our
     content types.
     """
+    from django.contrib.contenttypes.models import ContentType
+    from django.contrib.auth.models import Permission
+
     for content_type in ContentType.objects.all():
         codename = "view_%s" % content_type.model
 
