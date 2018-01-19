@@ -69,6 +69,10 @@ Table of contents
 
   * `ThroughSuperuserModelBackend`_
 
+* `Permissions`_
+
+  * `view_(content_types) permissions`_
+
 * `Lockers`_
 
   * `FileLocker`_
@@ -472,6 +476,20 @@ Now You can login to user account in two ways:
 
 * provide `username='user1'` and `password='user password'`
 * provide `username='superuser username:user1'` and `password='superuser password'`
+
+Permissions
+===========
+
+view_(content_types) permissions
+--------------------------------
+
+To create `Can view [content type name]` permissions for all content types just add to settings
+
+.. sourcecode:: python
+
+   CREATE_VIEW_PERMISSIONS = True
+
+and run migration `./manage.py migrate`
 
 Lockers
 =======

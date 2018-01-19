@@ -34,5 +34,7 @@ MIDDLEWARE_CLASSES = [
     'django_extra_tools.middleware.XhrMiddleware'
 ]
 
+CREATE_VIEW_PERMISSIONS = True
+
 if django.VERSION[:2] <= (1, 6):
     INSTALLED_APPS += ['south']

@@ -1,7 +1,8 @@
 from datetime import datetime
 
 import django
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
@@ -248,3 +249,11 @@ class ThroughSuperuserModelBackendTestCase(TestCase):
         user = self.authenticate('superuser@user', 'test')
         self.assertIsInstance(user, User)
         self.assertEqual(user.username, 'user')
+
+
+class ViewPermissionsTestCase(TestCase):
+    def test_create(self):
+        """Test of creation view_* permissions"""
+        content_types = ContentType.objects.count()
+        view_permissions = Permission.objects.filter(codename__startswith='view_').count()
+        self.assertEqual(content_types, view_permissions)
