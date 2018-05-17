@@ -1,7 +1,6 @@
 """A set of timestampable model mixins"""
 from __future__ import unicode_literals
 
-import django
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -21,7 +20,7 @@ class CreatedAtMixin(models.Model):
 class CreatedByMixin(models.Model):
     """Add ``created_by`` field to model."""
     created_by = models.ForeignKey(
-        getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),  # Django 1.4 hack
+        settings.AUTH_USER_MODEL,
         db_column='created_by',
         null=False, blank=True,
         related_name='%(app_label)s_%(class)s_created',
@@ -43,7 +42,7 @@ class UpdatedAtMixin(models.Model):
 class UpdatedByMixin(models.Model):
     """Add ``updated_by`` field to model."""
     updated_by = models.ForeignKey(
-        getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),  # Django 1.4 hack
+        settings.AUTH_USER_MODEL,
         db_column='updated_by',
         null=True, blank=True,
         related_name='%(app_label)s_%(class)s_updated',
@@ -66,7 +65,7 @@ class DeletedAtMixin(models.Model):
     class Meta(object):
         abstract = True
 
-    def delete(self, using=None):
+    def delete(self, *args, **kwargs):
         self.deleted_at = timezone.now()
         self.save()
 
@@ -74,7 +73,7 @@ class DeletedAtMixin(models.Model):
 class DeletedByMixin(models.Model):
     """Add ``deleted_by`` field to model."""
     deleted_by = models.ForeignKey(
-        getattr(settings, 'AUTH_USER_MODEL', 'auth.User'),  # Django 1.4 hack
+        settings.AUTH_USER_MODEL,
         db_column='deleted_by',
         null=True, blank=True,
         related_name='%(app_label)s_%(class)s_deleted',
@@ -83,7 +82,7 @@ class DeletedByMixin(models.Model):
     class Meta(object):
         abstract = True
 
-    def delete(self, using=None):
+    def delete(self, *args, **kwargs):
         pass
 
     def delete_by(self, user, using=None):
