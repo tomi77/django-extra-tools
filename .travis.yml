@@ -8,7 +8,6 @@ env:
     - DATABASE_HOST=127.0.0.1
     - DATABASE_PORT=5432
   matrix:
-    - DJANGO_VERSION=1.7.11
     - DJANGO_VERSION=1.8.18
     - DJANGO_VERSION=1.9.13
     - DJANGO_VERSION=1.10.8
@@ -31,7 +30,7 @@ addons:
 services: postgresql
 
 install:
-  - pip install coveralls psycopg2 pyyaml south
+  - pip install coveralls psycopg2 pyyaml
   - pip install -q Django==$DJANGO_VERSION
   - pip install --upgrade mock
 

@@ -12,7 +12,6 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Django',
-        'Framework :: Django :: 1.7',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
         'Framework :: Django :: 1.10',
@@ -33,7 +32,7 @@ setup(
         'Topic :: Utilities',
     ],
     license='MIT',
-    install_requires=['Django >= 1.7.0'],
+    install_requires=['Django >= 1.8.0'],
     packages=find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
 )
