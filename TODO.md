@@ -4,3 +4,4 @@
 * create database partitioned table
 * URIField
 * URIValidator
+* migrations.LoadFixtures
