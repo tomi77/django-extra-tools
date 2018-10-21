@@ -1,3 +1,4 @@
+"""PostgreSQL Data Type Formatting Functions"""
 from django.db.models import Func, DateField, DateTimeField, FloatField, TextField
 
 

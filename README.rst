@@ -48,7 +48,7 @@ Table of contents
   * `batch_qs`_
   * `pg_version`_
 
-* `PostgreSQL data type formatting functions`_
+* `PostgreSQL Data Type Formatting Functions`_
 
   * `ToChar`_
   * `ToDate`_
@@ -364,7 +364,7 @@ Return tuple with PostgreSQL version of a specific connection.
 
    version = pg_version()
 
-PostgreSQL data type formatting functions
+PostgreSQL Data Type Formatting Functions
 =========================================
 
 ToChar
