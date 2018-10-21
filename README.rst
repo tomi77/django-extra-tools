@@ -58,6 +58,11 @@ Table of contents
 * `PostgreSQL Date/Time Functions`_
 
   * `Age`_
+  * `ClockTimestamp`_
+  * `CurrentDate`_
+  * `CurrentTime`_
+  * `CurrentTimestamp`_
+  * `DatePart`_
 
 * `HTTP Response`_
 
@@ -415,6 +420,31 @@ Subtract from current_date (at midnight).
 .. sourcecode:: sql
 
    age(timestamp)
+
+ClockTimestamp
+--------------
+
+Current date and time (changes during statement execution)
+
+CurrentDate
+-----------
+
+Current date
+
+CurrentTime
+-----------
+
+Current time of day
+
+CurrentTimestamp
+----------------
+
+Current date and time (start of current transaction)
+
+DatePart
+--------
+
+Get subfield (equivalent to extract)
 
 HTTP Response
 =============
