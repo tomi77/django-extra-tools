@@ -48,6 +48,17 @@ Table of contents
   * `batch_qs`_
   * `pg_version`_
 
+* `PostgreSQL data type formatting functions`_
+
+  * `ToChar`_
+  * `ToDate`_
+  * `ToNumber`_
+  * `ToTimestamp`_
+
+* `PostgreSQL Date/Time Functions`_
+
+  * `Age`_
+
 * `HTTP Response`_
 
   * `HttpResponseGetFile`_
@@ -352,6 +363,58 @@ Return tuple with PostgreSQL version of a specific connection.
    from django_extra_tools.db.models import pg_version
 
    version = pg_version()
+
+PostgreSQL data type formatting functions
+=========================================
+
+ToChar
+------
+
+Convert time stamp, interval, integer, real, double precision and numeric to string.
+
+.. sourcecode:: python
+
+   from django_extra_tools.db.models.functions.postgresql import ToChar
+
+   MyTable.objects.all().annotate(ToChar('col'))
+
+ToDate
+------
+
+Convert string to date
+
+ToNumber
+--------
+
+Convert string to numeric
+
+ToTimestamp
+-----------
+
+Convert string to time stamp
+
+.. sourcecode:: sql
+
+   to_timestamp(text, text)
+
+
+PostgreSQL Date/Time Functions
+==============================
+
+Age
+---
+
+Subtract arguments, producing a "symbolic" result that uses years and months, rather than just days.
+
+.. sourcecode:: sql
+
+   age(timestamp, timestamp)
+
+Subtract from current_date (at midnight).
+
+.. sourcecode:: sql
+
+   age(timestamp)
 
 HTTP Response
 =============
