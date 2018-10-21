@@ -3,6 +3,7 @@ import os
 import tempfile
 from importlib import import_module
 
+import psutil
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
 
@@ -38,14 +39,21 @@ class FileLocker(object):
         filename = os.path.join(tempfile.gettempdir(), '{}.lock'.format(name))
 
         try:
-            fd = os.open(filename, os.O_CREAT | os.O_EXCL)
+            fd = open(filename)
+            pid = int(fd.readline())
+            fd.close()
+        except (IOError, ValueError):
+            pid = None
+
+        if pid is not None and psutil.pid_exists(pid):
+            return
+
+        try:
+            fd = open(filename, 'w')
+            fd.write(str(os.getpid()))
+            fd.close()
 
             def register():
-                try:
-                    os.close(fd)
-                except OSError:
-                    pass
-
                 try:
                     os.remove(filename)
                 except OSError:
