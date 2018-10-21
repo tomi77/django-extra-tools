@@ -78,6 +78,10 @@ Table of contents
   * `FileLocker`_
   * `CacheLocker`_
 
+* `Migrations`_
+
+  * `LoadFixtures`_
+
 Installation
 ============
 
@@ -535,3 +539,9 @@ You can configure this locker through settings:
 .. sourcecode:: python
 
    DEFAULT_LOCKER_CLASS = 'django_extra_tools.lockers.CacheLocker'
+
+Migrations
+==========
+
+LoadFixtures
+------------
