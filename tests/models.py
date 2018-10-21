@@ -3,6 +3,10 @@ from django.db.models import fields
 
 from django_extra_tools.db.models import timestampable
 
+permissions = (('view_x', 'Can view tests.X'),
+               ('view_y', 'Can view tests.Y'),
+               )
+
 
 class FirstLastTest(models.Model):
     ts = fields.DateField()
