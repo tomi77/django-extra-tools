@@ -1,5 +1,5 @@
 """PostgreSQL Date/Time Functions"""
-from django.db.models import Func, Value, DateField, DateTimeField, DurationField, FloatField, TimeField
+from django.db.models import Func, Value, BooleanField, DateField, DateTimeField, DurationField, FloatField, TimeField
 
 
 class Age(Func):
@@ -184,3 +184,9 @@ class DateTrunc(Func):
     DECADE = DatePart.DECADE
     CENTURY = DatePart.CENTURY
     MILLENNIUM = DatePart.MILLENNIUM
+
+
+class IsFinite(Func):
+    """Test for finite date, time stamp, interval (not +/-infinity)"""
+    function = "ISFINITE"
+    output_field = BooleanField()

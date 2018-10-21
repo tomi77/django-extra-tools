@@ -64,6 +64,7 @@ Table of contents
   * `CurrentTimestamp`_
   * `DatePart`_
   * `DateTrunc`_
+  * `IsFinite`_
 
 * `HTTP Response`_
 
@@ -451,6 +452,11 @@ DateTrunc
 ---------
 
 Truncate to specified precision
+
+IsFinite
+--------
+
+Test for finite date, time stamp, interval (not +/-infinity)
 
 
 HTTP Response
