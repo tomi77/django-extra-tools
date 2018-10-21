@@ -63,6 +63,7 @@ Table of contents
   * `CurrentTime`_
   * `CurrentTimestamp`_
   * `DatePart`_
+  * `DateTrunc`_
 
 * `HTTP Response`_
 
@@ -445,6 +446,12 @@ DatePart
 --------
 
 Get subfield (equivalent to extract)
+
+DateTrunc
+---------
+
+Truncate to specified precision
+
 
 HTTP Response
 =============

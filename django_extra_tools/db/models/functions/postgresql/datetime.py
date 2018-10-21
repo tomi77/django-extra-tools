@@ -164,3 +164,23 @@ class DatePart(Func):
     from AD years should be done with care.
     """
     YEAR = Value('year')
+
+
+class DateTrunc(Func):
+    """Truncate to specified precision"""
+    function = "DATE_TRUNC"
+    output_field = DateTimeField()
+
+    MICROSECONDS = DatePart.MICROSECONDS
+    MILLISECONDS = DatePart.MILLISECONDS
+    SECOND = DatePart.SECOND
+    MINUTE = DatePart.MINUTE
+    HOUR = DatePart.HOUR
+    DAY = DatePart.DAY
+    WEEK = DatePart.WEEK
+    MONTH = DatePart.MONTH
+    QUARTER = DatePart.QUARTER
+    YEAR = DatePart.YEAR
+    DECADE = DatePart.DECADE
+    CENTURY = DatePart.CENTURY
+    MILLENNIUM = DatePart.MILLENNIUM
