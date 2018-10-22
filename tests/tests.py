@@ -12,11 +12,12 @@ from django_extra_tools.auth.backends import ThroughSuperuserModelBackend
 from django_extra_tools.db import pg_version
 from django_extra_tools.db.models.aggregates import First, Last, Median, \
     StringAgg
+from django_extra_tools.db.models.functions import postgresql
 from django_extra_tools.templatetags.parse import parse_duration
 from django_extra_tools.wsgi_request import get_client_ip
 
 from .models import FirstLastTest, MedianTest, StringAggTest, \
-    TimestampableTest
+    TimestampableTest, FunctionsTest
 
 try:
     from unittest import mock
@@ -257,3 +258,53 @@ class ViewPermissionsTestCase(TestCase):
         content_types = ContentType.objects.count()
         view_permissions = Permission.objects.filter(codename__startswith='view_').count()
         self.assertEqual(content_types, view_permissions)
+
+
+class FunctionsTestCase(TestCase):
+    def test_age(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.Age('col'))
+        self.assertIn('AGE("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_clock_timestamp(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ClockTimestamp())
+        self.assertIn('CLOCK_TIMESTAMP()', '%s' % qs.query)
+
+    def test_current_date(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.CurrentDate())
+        self.assertIn('CURRENT_DATE', '%s' % qs.query)
+
+    def test_current_time(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.CurrentTime())
+        self.assertIn('CURRENT_TIME', '%s' % qs.query)
+
+    def test_current_timestamp(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.CurrentTimestamp())
+        self.assertIn('CURRENT_TIMESTAMP', '%s' % qs.query)
+
+    def test_date_part(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.DatePart(postgresql.DatePart.CENTURY, 'col'))
+        self.assertIn('DATE_PART(''century'', "tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_date_trunc(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.DateTrunc(postgresql.DateTrunc.CENTURY, 'col'))
+        self.assertIn('DATE_TRUNC(''century'', "tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_is_finite(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.IsFinite('col'))
+        self.assertIn('ISFINITE("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_to_char(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToChar('col'))
+        self.assertIn('TO_CHAR("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_to_date(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToDate('col'))
+        self.assertIn('TO_DATE("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_to_number(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToNumber('col'))
+        self.assertIn('TO_NUMBER("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_to_timestamp(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToTimestamp('col'))
+        self.assertIn('TO_TIMESTAMP("tests_functionstest"."col")', '%s' % qs.query)

@@ -22,3 +22,7 @@ class StringAggTest(models.Model):
 class TimestampableTest(timestampable.CreatedMixin, timestampable.UpdatedMixin,
                         timestampable.DeletedMixin, models.Model):
     name = models.CharField(max_length=10)
+
+
+class FunctionsTest(models.Model):
+    col = models.IntegerField()
