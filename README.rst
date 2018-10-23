@@ -48,14 +48,7 @@ Table of contents
   * `batch_qs`_
   * `pg_version`_
 
-* `PostgreSQL Data Type Formatting Functions`_
-
-  * `ToChar`_
-  * `ToDate`_
-  * `ToNumber`_
-  * `ToTimestamp`_
-
-* `PostgreSQL Date/Time Functions`_
+* `PostgreSQL Functions`_
 
   * `Age`_
   * `ClockTimestamp`_
@@ -65,6 +58,11 @@ Table of contents
   * `DatePart`_
   * `DateTrunc`_
   * `IsFinite`_
+  * `JustifyDays`_
+  * `ToChar`_
+  * `ToDate`_
+  * `ToNumber`_
+  * `ToTimestamp`_
 
 * `HTTP Response`_
 
@@ -371,42 +369,14 @@ Return tuple with PostgreSQL version of a specific connection.
 
    version = pg_version()
 
-PostgreSQL Data Type Formatting Functions
-=========================================
-
-ToChar
-------
-
-Convert time stamp, interval, integer, real, double precision and numeric to string.
+PostgreSQL Functions
+====================
 
 .. sourcecode:: python
 
    from django_extra_tools.db.models.functions.postgresql import ToChar
 
    MyTable.objects.all().annotate(ToChar('col'))
-
-ToDate
-------
-
-Convert string to date
-
-ToNumber
---------
-
-Convert string to numeric
-
-ToTimestamp
------------
-
-Convert string to time stamp
-
-.. sourcecode:: sql
-
-   to_timestamp(text, text)
-
-
-PostgreSQL Date/Time Functions
-==============================
 
 Age
 ---
@@ -428,35 +398,116 @@ ClockTimestamp
 
 Current date and time (changes during statement execution)
 
+.. sourcecode:: sql
+
+   clock_timestamp()
+
 CurrentDate
 -----------
 
 Current date
+
+.. sourcecode:: sql
+
+    current_date
 
 CurrentTime
 -----------
 
 Current time of day
 
+.. sourcecode:: sql
+
+    current_time
+
 CurrentTimestamp
 ----------------
 
 Current date and time (start of current transaction)
+
+.. sourcecode:: sql
+
+    current_timestamp
 
 DatePart
 --------
 
 Get subfield (equivalent to extract)
 
+.. sourcecode:: sql
+
+   date_part(text, timestamp)
+   date_part(text, interval)
+
 DateTrunc
 ---------
 
 Truncate to specified precision
 
+.. sourcecode:: sql
+
+   date_trunc(text, timestamp)
+   date_trunc(text, interval)
+
 IsFinite
 --------
 
 Test for finite date, time stamp, interval (not +/-infinity)
+
+.. sourcecode:: sql
+
+   isfinite(date)
+   isfinite(timestamp)
+   isfinite(interval)
+
+JustifyDays
+-----------
+
+Adjust interval so 30-day time periods are represented as months
+
+.. sourcecode:: sql
+
+   justify_days(interval)
+
+ToChar
+------
+
+Convert time stamp, interval, integer, real, double precision and numeric to string.
+
+.. sourcecode:: sql
+
+   to_char(timestamp, text)
+   to_char(interval, text)
+   to_char(int, text)
+   to_char(double precision, text)
+   to_char(numeric, text)
+
+ToDate
+------
+
+Convert string to date
+
+.. sourcecode:: sql
+
+   to_date(text, text)
+
+ToNumber
+--------
+
+Convert string to numeric
+
+.. sourcecode:: sql
+
+   to_number(text, text)
+
+ToTimestamp
+-----------
+
+Convert string to time stamp
+
+.. sourcecode:: sql
+
+   to_timestamp(text, text)
 
 
 HTTP Response
