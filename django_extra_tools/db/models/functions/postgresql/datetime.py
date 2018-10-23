@@ -13,12 +13,21 @@ class Age(Func):
     function = 'AGE'
     output_field = DurationField()
 
+    def __init__(self, expression1, expression2=None, **extra):
+        expressions = [expression1]
+        if expression2 is not None:
+            expressions.append(expression2)
+        super(Age, self).__init__(*expressions, **extra)
+
 
 class ClockTimestamp(Func):
     """Current date and time (changes during statement execution)"""
     function = 'CLOCK_TIMESTAMP'
     template = '%(function)s()'
     output_field = DateTimeField()
+
+    def __init__(self, **extra):
+        super(ClockTimestamp, self).__init__(**extra)
 
 
 class CurrentDate(Func):
@@ -27,6 +36,9 @@ class CurrentDate(Func):
     template = '%(function)s'
     output_field = DateField()
 
+    def __init__(self, **extra):
+        super(CurrentDate, self).__init__(**extra)
+
 
 class CurrentTime(Func):
     """Current time of day"""
@@ -34,12 +46,18 @@ class CurrentTime(Func):
     template = '%(function)s'
     output_field = TimeField()
 
+    def __init__(self, **extra):
+        super(CurrentTime, self).__init__(**extra)
+
 
 class CurrentTimestamp(Func):
     """Current date and time (start of current transaction)"""
     function = 'CURRENT_TIMESTAMP'
     template = '%(function)s'
     output_field = DateTimeField()
+
+    def __init__(self, **extra):
+        super(CurrentTimestamp, self).__init__(**extra)
 
 
 class DatePart(Func):
@@ -50,6 +68,15 @@ class DatePart(Func):
     """
     function = "DATE_PART"
     output_field = FloatField()
+
+    def __init__(self, field, expression, **extra):
+        expressions = []
+        if field is not None:
+            if not hasattr(field, 'resolve_expression'):
+                field = Value(field)
+            expressions.append(field)
+        expressions.append(expression)
+        super(DatePart, self).__init__(*expressions, **extra)
 
     """
     The century
@@ -171,6 +198,15 @@ class DateTrunc(Func):
     function = "DATE_TRUNC"
     output_field = DateTimeField()
 
+    def __init__(self, field, expression, **extra):
+        expressions = []
+        if field is not None:
+            if not hasattr(field, 'resolve_expression'):
+                field = Value(field)
+            expressions.append(field)
+        expressions.append(expression)
+        super(DateTrunc, self).__init__(*expressions, **extra)
+
     MICROSECONDS = DatePart.MICROSECONDS
     MILLISECONDS = DatePart.MILLISECONDS
     SECOND = DatePart.SECOND
@@ -190,3 +226,15 @@ class IsFinite(Func):
     """Test for finite date, time stamp, interval (not +/-infinity)"""
     function = "ISFINITE"
     output_field = BooleanField()
+
+    def __init__(self, expression, **extra):
+        super(IsFinite, self).__init__(expression, **extra)
+
+
+class JustifyDays(Func):
+    """Adjust interval so 30-day time periods are represented as months"""
+    function = 'JUSTIFY_DAYS'
+    output_field = DurationField()
+
+    def __init__(self, expression, **extra):
+        super(JustifyDays, self).__init__(expression, **extra)

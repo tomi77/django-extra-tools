@@ -3,6 +3,7 @@ from datetime import datetime
 import django
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Value
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 from django.test import TestCase
@@ -262,6 +263,9 @@ class ViewPermissionsTestCase(TestCase):
 
 class FunctionsTestCase(TestCase):
     def test_age(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.Age('col', 'col'))
+        self.assertIn('AGE("tests_functionstest"."col", "tests_functionstest"."col")', '%s' % qs.query)
+
         qs = FunctionsTest.objects.all().annotate(x=postgresql.Age('col'))
         self.assertIn('AGE("tests_functionstest"."col")', '%s' % qs.query)
 
@@ -285,26 +289,51 @@ class FunctionsTestCase(TestCase):
         qs = FunctionsTest.objects.all().annotate(x=postgresql.DatePart(postgresql.DatePart.CENTURY, 'col'))
         self.assertIn('DATE_PART(''century'', "tests_functionstest"."col")', '%s' % qs.query)
 
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.DatePart('century', 'col'))
+        self.assertIn('DATE_PART(''century'', "tests_functionstest"."col")', '%s' % qs.query)
+
     def test_date_trunc(self):
         qs = FunctionsTest.objects.all().annotate(x=postgresql.DateTrunc(postgresql.DateTrunc.CENTURY, 'col'))
+        self.assertIn('DATE_TRUNC(''century'', "tests_functionstest"."col")', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.DateTrunc('century', 'col'))
         self.assertIn('DATE_TRUNC(''century'', "tests_functionstest"."col")', '%s' % qs.query)
 
     def test_is_finite(self):
         qs = FunctionsTest.objects.all().annotate(x=postgresql.IsFinite('col'))
         self.assertIn('ISFINITE("tests_functionstest"."col")', '%s' % qs.query)
 
+    def test_justify_days(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.JustifyDays('col'))
+        self.assertIn('JUSTIFY_DAYS("tests_functionstest"."col")', '%s' % qs.query)
+
     def test_to_char(self):
-        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToChar('col'))
-        self.assertIn('TO_CHAR("tests_functionstest"."col")', '%s' % qs.query)
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToChar('col', 'HH'))
+        self.assertIn('TO_CHAR("tests_functionstest"."col", ''HH'')', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToChar('col', Value('MM')))
+        self.assertIn('TO_CHAR("tests_functionstest"."col", ''MM'')', '%s' % qs.query)
 
     def test_to_date(self):
-        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToDate('col'))
-        self.assertIn('TO_DATE("tests_functionstest"."col")', '%s' % qs.query)
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToDate('col', 'HH'))
+        self.assertIn('TO_DATE("tests_functionstest"."col", ''HH'')', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToDate('col', Value('MM')))
+        self.assertIn('TO_DATE("tests_functionstest"."col", ''MM'')', '%s' % qs.query)
 
     def test_to_number(self):
-        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToNumber('col'))
-        self.assertIn('TO_NUMBER("tests_functionstest"."col")', '%s' % qs.query)
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToNumber('col', '99'))
+        self.assertIn('TO_NUMBER("tests_functionstest"."col", ''99'')', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToNumber('col', Value('99')))
+        self.assertIn('TO_NUMBER("tests_functionstest"."col", ''99'')', '%s' % qs.query)
 
     def test_to_timestamp(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToTimestamp('col', 'DD'))
+        self.assertIn('TO_TIMESTAMP("tests_functionstest"."col", ''DD'')', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.ToTimestamp('col', Value('DD')))
+        self.assertIn('TO_TIMESTAMP("tests_functionstest"."col", ''DD'')', '%s' % qs.query)
+
         qs = FunctionsTest.objects.all().annotate(x=postgresql.ToTimestamp('col'))
         self.assertIn('TO_TIMESTAMP("tests_functionstest"."col")', '%s' % qs.query)
