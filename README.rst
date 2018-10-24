@@ -374,140 +374,135 @@ PostgreSQL Functions
 
 .. sourcecode:: python
 
-   from django_extra_tools.db.models.functions.postgresql import ToChar
+   from django_extra_tools.db.models.functions import postgresql
 
-   MyTable.objects.all().annotate(ToChar('col'))
+   MyTable.objects.all().annotate(x=postgresql.ToChar('col'))
 
 Age
 ---
 
 Subtract arguments, producing a "symbolic" result that uses years and months, rather than just days.
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   age(timestamp, timestamp)
+   postgresql.Age('ts1', 'ts2')
 
 Subtract from current_date (at midnight).
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   age(timestamp)
+   postgresql.Age('ts')
 
 ClockTimestamp
 --------------
 
 Current date and time (changes during statement execution)
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   clock_timestamp()
+   postgresql.ClockTimestamp()
 
 CurrentDate
 -----------
 
 Current date
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-    current_date
+    postgresql.CurrentDate()
 
 CurrentTime
 -----------
 
 Current time of day
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-    current_time
+    postgresql.CurrentTime()
 
 CurrentTimestamp
 ----------------
 
 Current date and time (start of current transaction)
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-    current_timestamp
+    postgresql.CurrentTimestamp()
 
 DatePart
 --------
 
 Get subfield (equivalent to extract)
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   date_part(text, timestamp)
-   date_part(text, interval)
+   postgresql.DatePart(postgresql.DatePart.CENTURY, 'ts_or_interval')
+   postgresql.DatePart('century', 'ts_or_interval')
 
 DateTrunc
 ---------
 
 Truncate to specified precision
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   date_trunc(text, timestamp)
-   date_trunc(text, interval)
+   postgresql.DateTrunc(postgresql.DateTrunc.CENTURY, 'ts_or_interval')
+   postgresql.DateTrunc('century', 'ts_or_interval')
 
 IsFinite
 --------
 
 Test for finite date, time stamp, interval (not +/-infinity)
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   isfinite(date)
-   isfinite(timestamp)
-   isfinite(interval)
+   postgresql.IsFinite('date_ts_or_interval')
 
 JustifyDays
 -----------
 
 Adjust interval so 30-day time periods are represented as months
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   justify_days(interval)
+   postgresql.JustifyDays('interval')
 
 ToChar
 ------
 
 Convert time stamp, interval, integer, real, double precision and numeric to string.
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   to_char(timestamp, text)
-   to_char(interval, text)
-   to_char(int, text)
-   to_char(double precision, text)
-   to_char(numeric, text)
+   postgresql.ToChar('col', 'HH')
 
 ToDate
 ------
 
 Convert string to date
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   to_date(text, text)
+   postgresql.ToDate('col', 'HH')
 
 ToNumber
 --------
 
 Convert string to numeric
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   to_number(text, text)
+   postgresql.ToNumber('col', '99')
 
 ToTimestamp
 -----------
 
 Convert string to time stamp
 
-.. sourcecode:: sql
+.. sourcecode:: python
 
-   to_timestamp(text, text)
+   postgresql.ToTimestamp('col', 'DD')
+   postgresql.ToTimestamp('col')
 
 
 HTTP Response
