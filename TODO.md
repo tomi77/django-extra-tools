@@ -5,3 +5,4 @@
 * URIField
 * URIValidator
 * migrations.LoadFixtures
+* migrations.SetDefault
