@@ -238,3 +238,101 @@ class JustifyDays(Func):
 
     def __init__(self, expression, **extra):
         super(JustifyDays, self).__init__(expression, **extra)
+
+
+class JustifyHours(Func):
+    """Adjust interval so 24-hour time periods are represented as days"""
+    function = 'JUSTIFY_HOURS'
+    output_field = DurationField()
+
+    def __init__(self, expression, **extra):
+        super(JustifyHours, self).__init__(expression, **extra)
+
+
+class JustifyInterval(Func):
+    """
+    Adjust interval using justify_days and justify_hours,
+    with additional sign adjustments
+    """
+    function = 'JUSTIFY_INTERVAL'
+    output_field = DurationField()
+
+    def __init__(self, expression, **extra):
+        super(JustifyInterval, self).__init__(expression, **extra)
+
+
+class LocalTime(Func):
+    """Current time of day"""
+    function = 'LOCALTIME'
+    template = "%(function)s"
+    output_field = TimeField()
+
+    def __init__(self, **extra):
+        super(LocalTime, self).__init__(**extra)
+
+
+class LocalTimestamp(Func):
+    """Current date and time (start of current transaction)"""
+    function = 'LOCALTIMESTAMP'
+    template = "%(function)s"
+    output_field = DateTimeField()
+
+    def __init__(self, **extra):
+        super(LocalTimestamp, self).__init__(**extra)
+
+
+class MakeDate(Func):
+    """Create date from year, month and day fields"""
+    function = 'MAKE_DATE'
+    output_field = DateField()
+
+    def __init__(self, year, month, day, **extra):
+        super(MakeDate, self).__init__(year, month, day, **extra)
+
+
+class MakeInterval(Func):
+    """
+    Create interval from years, months, weeks, days, hours, minutes
+    and seconds fields
+    """
+    function = 'MAKE_INTERVAL'
+    output_field = DurationField()
+
+    def __init__(self, years=0, months=0, weeks=0, days=0, hours=0, mins=0, secs=0.0, **extra):
+        super(MakeInterval, self).__init__(years, months, weeks, days, hours, mins, secs, **extra)
+
+
+class MakeTime(Func):
+    """Create time from hour, minute and seconds fields"""
+    function = 'MAKE_TIME'
+    output_field = TimeField()
+
+    def __init__(self, hour, min, sec, **extra):
+        super(MakeTime, self).__init__(hour, min, sec, **extra)
+
+
+class MakeTimestamp(Func):
+    """Create timestamp from year, month, day, hour, minute and seconds fields"""
+    function = 'MAKE_TIMESTAMP'
+    output_field = DateTimeField()
+
+    def __init__(self, year, month, day, hour, min, sec, **extra):
+        super(MakeTimestamp, self).__init__(year, month, day, hour, min, sec, **extra)
+
+
+class MakeTimestampTz(Func):
+    """
+    Create timestamp with time zone from year, month, day, hour, minute
+    and seconds fields. If timezone is not specified, the current
+    time zone is used
+    """
+    function = 'MAKE_TIMESTAMPTZ'
+    output_field = DateTimeField()
+
+    def __init__(self, year, month, day, hour, min, sec, timezone=None, **extra):
+        expressions = [year, month, day, hour, min, sec]
+        if timezone is not None:
+            if not hasattr(timezone, 'resolve_expression'):
+                timezone = Value(timezone)
+            expressions.append(timezone)
+        super(MakeTimestampTz, self).__init__(*expressions, **extra)

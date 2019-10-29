@@ -261,7 +261,7 @@ class ViewPermissionsTestCase(TestCase):
         self.assertEqual(content_types, view_permissions)
 
 
-class FunctionsTestCase(TestCase):
+class PostgresqlFunctionsTestCase(TestCase):
     def test_age(self):
         qs = FunctionsTest.objects.all().annotate(x=postgresql.Age('col', 'col'))
         self.assertIn('AGE("tests_functionstest"."col", "tests_functionstest"."col")', '%s' % qs.query)
@@ -306,6 +306,48 @@ class FunctionsTestCase(TestCase):
     def test_justify_days(self):
         qs = FunctionsTest.objects.all().annotate(x=postgresql.JustifyDays('col'))
         self.assertIn('JUSTIFY_DAYS("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_justify_hours(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.JustifyHours('col'))
+        self.assertIn('JUSTIFY_HOURS("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_justify_interval(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.JustifyInterval('col'))
+        self.assertIn('JUSTIFY_INTERVAL("tests_functionstest"."col")', '%s' % qs.query)
+
+    def test_local_time(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.LocalTime())
+        self.assertIn('LOCALTIME', '%s' % qs.query)
+
+    def test_local_timestamp(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.LocalTimestamp())
+        self.assertIn('LOCALTIMESTAMP', '%s' % qs.query)
+
+    def test_make_date(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeDate(2013, 7, 15))
+        self.assertIn('MAKE_DATE(2013, 7, 15)', '%s' % qs.query)
+
+    def test_make_interval(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeInterval(days=10))
+        self.assertIn('MAKE_INTERVAL(0, 0, 0, 10, 0, 0, 0.0)', '%s' % qs.query)
+
+    def test_make_time(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeTime(8, 15, 23.5))
+        self.assertIn('MAKE_TIME(8, 15, 23.5)', '%s' % qs.query)
+
+    def test_make_timestamp(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeTimestamp(2013, 7, 15, 8, 15, 23.5))
+        self.assertIn('MAKE_TIMESTAMP(2013, 7, 15, 8, 15, 23.5)', '%s' % qs.query)
+
+    def test_make_timestamp_tz(self):
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeTimestampTz(2013, 7, 15, 8, 15, 23.5))
+        self.assertIn('MAKE_TIMESTAMPTZ(2013, 7, 15, 8, 15, 23.5)', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeTimestampTz(2013, 7, 15, 8, 15, 23.5, 'UTC'))
+        self.assertIn('MAKE_TIMESTAMPTZ(2013, 7, 15, 8, 15, 23.5, ''UTC'')', '%s' % qs.query)
+
+        qs = FunctionsTest.objects.all().annotate(x=postgresql.MakeTimestampTz(2013, 7, 15, 8, 15, 23.5, Value('UTC')))
+        self.assertIn('MAKE_TIMESTAMPTZ(2013, 7, 15, 8, 15, 23.5, ''UTC'')', '%s' % qs.query)
 
     def test_to_char(self):
         qs = FunctionsTest.objects.all().annotate(x=postgresql.ToChar('col', 'HH'))

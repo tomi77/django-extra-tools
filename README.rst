@@ -59,6 +59,15 @@ Table of contents
   * `DateTrunc`_
   * `IsFinite`_
   * `JustifyDays`_
+  * `JustifyHours`_
+  * `JustifyInterval`_
+  * `LocalTime`_
+  * `LocalTimestamp`_
+  * `MakeDate`_
+  * `MakeInterval`_
+  * `MakeTime`_
+  * `MakeTimestamp`_
+  * `MakeTimestampTz`_
   * `ToChar`_
   * `ToDate`_
   * `ToNumber`_
@@ -466,6 +475,88 @@ Adjust interval so 30-day time periods are represented as months
 .. sourcecode:: python
 
    postgresql.JustifyDays('interval')
+
+JustifyHours
+------------
+
+Adjust interval so 24-hour time periods are represented as days
+
+.. sourcecode:: python
+
+   postgresql.JustifyHours('interval')
+
+JustifyInterval
+---------------
+
+Adjust interval using justify_days and justify_hours, with additional sign adjustments
+
+.. sourcecode:: python
+
+   postgresql.JustifyInterval('interval')
+
+LocalTime
+---------
+
+Current time of day
+
+.. sourcecode:: python
+
+   postgresql.LocalTime()
+
+LocalTimestamp
+--------------
+
+Current date and time (start of current transaction)
+
+.. sourcecode:: python
+
+   postgresql.LocalTimestamp()
+
+MakeDate
+--------
+
+Create date from year, month and day fields
+
+.. sourcecode:: python
+
+   postgresql.MakeDate(2013, 7, 15)
+
+
+MakeInterval
+------------
+
+Create interval from years, months, weeks, days, hours, minutes and seconds fields
+
+.. sourcecode:: python
+
+   postgresql.MakeInterval(days=10)
+
+MakeTime
+--------
+
+Create time from hour, minute and seconds fields
+
+.. sourcecode:: python
+
+   postgresql.MakeTime(8, 15, 23.5)
+
+MakeTimestamp
+-------------
+
+Create timestamp from year, month, day, hour, minute and seconds fields
+
+.. sourcecode:: python
+
+   postgresql.MakeTimestamp(2013, 7, 15, 8, 15, 23.5)
+
+MakeTimestampTz
+---------------
+
+Create timestamp from year, month, day, hour, minute, seconds and timezone fields
+
+.. sourcecode:: python
+
+   postgresql.MakeTimestampTz(2013, 7, 15, 8, 15, 23.5, 'UTC')
 
 ToChar
 ------
