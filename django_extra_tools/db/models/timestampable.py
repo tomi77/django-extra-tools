@@ -22,6 +22,7 @@ class CreatedByMixin(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         db_column='created_by',
+        on_delete=models.CASCADE,
         null=False, blank=True,
         related_name='%(app_label)s_%(class)s_created',
         verbose_name=_('Created by'))
@@ -44,6 +45,7 @@ class UpdatedByMixin(models.Model):
     updated_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         db_column='updated_by',
+        on_delete=models.CASCADE,
         null=True, blank=True,
         related_name='%(app_label)s_%(class)s_updated',
         verbose_name=_('Updated by'))
@@ -75,6 +77,7 @@ class DeletedByMixin(models.Model):
     deleted_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         db_column='deleted_by',
+        on_delete=models.CASCADE,
         null=True, blank=True,
         related_name='%(app_label)s_%(class)s_deleted',
         verbose_name=_('Deleted by'))
