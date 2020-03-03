@@ -6,6 +6,7 @@
 * Added post migrate hook to create `view_*` permissions for all content types
 * Removed support for Django < 1.8
 * Added `lock_error_handler` for `OneInstanceCommand`
+* Remove support for Python 3.4 (because of `pyyaml`)
 
 ## 0.3.0
 
