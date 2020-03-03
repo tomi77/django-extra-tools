@@ -7,6 +7,7 @@
 * Removed support for Django < 1.8
 * Added `lock_error_handler` for `OneInstanceCommand`
 * Remove support for Python 3.4 (because of `pyyaml`)
+* Added support for Django 2.0 - 2.2
 
 ## 0.3.0
 
