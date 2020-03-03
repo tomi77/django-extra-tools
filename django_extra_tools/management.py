@@ -24,8 +24,7 @@ class OneInstanceCommand(BaseCommand):
         try:
             lock(self.name)
         except LockError as exc:
-            sys.stderr.write("%s\n" % exc)
-            sys.exit(1)
+            self.lock_error_handler(exc)
 
         self.handle_instance(*args, **options)
 
@@ -34,6 +33,13 @@ class OneInstanceCommand(BaseCommand):
         Perform the command action for cron task.
         """
         raise NotImplementedError()
+
+    def lock_error_handler(self, exc):
+        """
+        Perform the action for lock error.
+        """
+        sys.stderr.write("%s\n" % exc)
+        sys.exit(1)
 
 
 class NagiosCheckCommand(BaseCommand):

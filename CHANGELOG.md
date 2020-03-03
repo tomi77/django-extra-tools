@@ -5,6 +5,7 @@
 * Added `lock` function that uses `FileLocker` or `CacheLocker` to lock multiple script executions
 * Added post migrate hook to create `view_*` permissions for all content types
 * Removed support for Django < 1.8
+* Added `lock_error_handler` for `OneInstanceCommand`
 
 ## 0.3.0
 

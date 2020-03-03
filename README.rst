@@ -407,6 +407,10 @@ same time.
        def handle_instance(self, *args, **options):
            # some operations
 
+       def lock_error_handler(self, exc):
+           # Own error handler
+           super(Command, self).lock_error_handler(exc)
+
 NagiosCheckCommand
 ------------------
 
