@@ -1,12 +1,4 @@
-try:
-    from django.db.transaction import get_connection
-except ImportError:
-    from django.db import DEFAULT_DB_ALIAS, connections
-
-    def get_connection(using=None):
-        if using is None:
-            using = DEFAULT_DB_ALIAS
-        return connections[using]
+from django.db.transaction import get_connection
 
 
 def pg_version(using=None):
