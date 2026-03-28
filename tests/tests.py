@@ -1,6 +1,6 @@
 from datetime import datetime
+from unittest import mock
 
-import django
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest
@@ -12,16 +12,10 @@ from django_extra_tools.auth.backends import ThroughSuperuserModelBackend
 from django_extra_tools.db import pg_version
 from django_extra_tools.db.models.aggregates import First, Last, Median, \
     StringAgg
-from django_extra_tools.templatetags.parse import parse_duration
 from django_extra_tools.wsgi_request import get_client_ip
 
 from .models import FirstLastTest, MedianTest, StringAggTest, \
     TimestampableTest
-
-try:
-    from unittest import mock
-except ImportError:
-    from mock import mock
 
 
 def mock_get_connection(version):
@@ -167,15 +161,14 @@ class ParseTimeTestCase(TestCase):
         self.assertEqual(tpl, '')
 
 
-if parse_duration is not None:
-    class ParseDurationCase(TestCase):
-        def test_parse_duration(self):
-            tpl = render_to_string('duration.txt', {'durationstr': '12:23:34'})
-            self.assertEqual(tpl, '12:23:34')
+class ParseDurationCase(TestCase):
+    def test_parse_duration(self):
+        tpl = render_to_string('duration.txt', {'durationstr': '12:23:34'})
+        self.assertEqual(tpl, '12:23:34')
 
-        def test_incorrect_duration(self):
-            tpl = render_to_string('duration.txt', {'durationstr': 'not a duration'})
-            self.assertEqual(tpl, 'None')
+    def test_incorrect_duration(self):
+        tpl = render_to_string('duration.txt', {'durationstr': 'not a duration'})
+        self.assertEqual(tpl, 'None')
 
 
 class TimestampableTestCase(TestCase):
@@ -227,10 +220,7 @@ class ThroughSuperuserModelBackendTestCase(TestCase):
     backend = ThroughSuperuserModelBackend()
 
     def authenticate(self, username, password):
-        if django.VERSION[:2] < (1, 11):
-            return self.backend.authenticate(username, password)
-        else:
-            return self.backend.authenticate(None, username, password)
+        return self.backend.authenticate(None, username, password)
 
     def test_user_through_superuser(self):
         """Test authenticate as user through superuser username and password"""

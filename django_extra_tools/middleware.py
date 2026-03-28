@@ -1,9 +1,10 @@
 from django import http
+from django.utils.deprecation import MiddlewareMixin
 
 from django_extra_tools.conf import settings
 
 
-class XhrMiddleware(object):
+class XhrMiddleware(MiddlewareMixin):
     """
     This middleware allows cross-domain XHR using the html5 postMessage API.
 

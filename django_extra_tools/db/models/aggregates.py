@@ -28,7 +28,7 @@ class Median(Aggregate):
     name = 'Median'
     function = 'MEDIAN'
 
-    def convert_value(self, value, expression, connection, context):
+    def convert_value(self, value, expression, connection, *args, **kwargs):
         return value
 
 
@@ -41,5 +41,5 @@ class StringAgg(Aggregate):
         super(StringAgg, self).__init__(expression, delimiter=delimiter,
                                         **extra)
 
-    def convert_value(self, value, expression, connection, context):
+    def convert_value(self, value, expression, connection, *args, **kwargs):
         return value

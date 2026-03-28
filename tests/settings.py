@@ -1,7 +1,5 @@
 import os
 
-import django
-
 
 SECRET_KEY = 'qaz123'
 
@@ -31,9 +29,8 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django_extra_tools.middleware.XhrMiddleware'
 ]
 
-if django.VERSION[:2] <= (1, 6):
-    INSTALLED_APPS += ['south']
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
