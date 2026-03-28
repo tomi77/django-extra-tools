@@ -78,4 +78,4 @@ class CacheLocker(object):
         atexit.register(register)
 
 
-lock = get_locker_class()
+lock = get_locker_class()()
